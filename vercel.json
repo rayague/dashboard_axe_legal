@@ -2,7 +2,7 @@
   "version": 2,
   "functions": {
     "api/*.php": {
-      "runtime": "vercel-php@0.7.0",
+      "runtime": "edouarddemotesq/php@1.0.0",
       "maxDuration": 30,
       "memory": 1024
     }
