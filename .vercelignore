@@ -1,0 +1,12 @@
+/vendor
+/storage
+/tests
+.env
+.env.*
+.git*
+.idea
+.vscode
+README.md
+.editorconfig
+.styleci.yml
+phpunit.xml

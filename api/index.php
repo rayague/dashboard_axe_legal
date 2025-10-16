@@ -1,7 +1,16 @@
 <?php
+// Load composer
 require __DIR__ . '/../vendor/autoload.php';
 
-$app = require_once __DIR__ . '/../bootstrap/app.php';
+// Prevent access to .env
+if (file_exists(__DIR__ . '/../.env')) {
+    exit('Access denied.');
+}
+
+$app = require __DIR__ . '/../bootstrap/app.php';
+
+// Configure storage path
+$app->useStoragePath('/tmp');
 
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
 
