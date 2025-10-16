@@ -2,7 +2,7 @@
   "version": 2,
   "framework": null,
   "functions": {
-    "api/*.php": {
+    "api/index.php": {
       "runtime": "vercel-php@0.6.0"
     }
   },
@@ -31,6 +31,6 @@
     "SSR_TEMP_PATH": "/tmp/ssr",
     "NODE_PATH": "node"
   },
-  "buildCommand": "npm run build",
+  "buildCommand": "chmod +x ./vercel-install.sh && ./vercel-install.sh && npm run build",
   "outputDirectory": "public"
 }
