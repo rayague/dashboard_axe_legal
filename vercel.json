@@ -2,7 +2,7 @@
   "version": 2,
   "functions": {
     "api/*.php": {
-      "runtime": "edouarddemotesq/php@1.0.0",
+      "runtime": "@now/php@1.0.0",
       "maxDuration": 30,
       "memory": 1024
     }
