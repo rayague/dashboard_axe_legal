@@ -12,5 +12,5 @@
     }
   ],
   "buildCommand": "npm run build",
-  "outputDirectory": "public/build"
+  "outputDirectory": "dist"
 }
