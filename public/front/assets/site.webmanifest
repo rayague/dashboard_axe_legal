@@ -1,0 +1,23 @@
+{
+    "name": "Axe Legal - Cabinet d'Avocats",
+    "short_name": "Axe Legal",
+    "description": "Cabinet d'avocats d'affaires et juristes experts au Bénin",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#1E5AA8",
+    "icons": [
+        {
+            "src": "images/image8.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "images/image8.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
+
+
