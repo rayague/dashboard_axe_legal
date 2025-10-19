@@ -19,6 +19,7 @@ class ConsultationRequest extends FormRequest
             'phone' => 'nullable|string|max:50',
             'subject' => 'nullable|string|max:255',
             'message' => 'nullable|string|max:2000',
+            'consultation_type' => 'nullable|string|in:presentiel,telephonique',
             'scheduled_at' => 'nullable|date',
         ];
     }

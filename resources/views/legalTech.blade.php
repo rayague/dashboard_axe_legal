@@ -2505,42 +2505,24 @@
                 border-radius: 0 0 15px 15px;
                 padding: 2rem;
                 position: relative;
-                min-height: 400px;
-                max-height: 600px;
-                overflow-y: auto;
+                min-height: 650px;
                 user-select: none;
                 -webkit-user-select: none;
                 -moz-user-select: none;
                 -ms-user-select: none;
-            " oncontextmenu="return false">
+                -webkit-touch-callout: none;
+            " oncontextmenu="return false" oncopy="return false" oncut="return false" onselectstart="return false">
 
-                <!-- Filigrane de sécurité -->
-                <div class="security-overlay" style="
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    pointer-events: none;
-                    background: repeating-linear-gradient(
-                        45deg,
-                        transparent,
-                        transparent 10px,
-                        rgba(0,0,0,0.02) 10px,
-                        rgba(0,0,0,0.02) 20px
-                    );
-                    z-index: 1;
-                "></div>
-
-                <!-- Contenu du document -->
+                <!-- Contenu du document (iframe PDF) -->
                 <div id="document-content" style="
                     position: relative;
                     z-index: 2;
-                    font-family: 'Georgia', serif;
-                    line-height: 1.8;
-                    color: #2c3e50;
+                    user-select: none;
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                    -ms-user-select: none;
                 ">
-                    <!-- Le contenu sera injecté par JavaScript -->
+                    <!-- Le PDF sera injecté par JavaScript -->
                 </div>
 
                 <!-- Message de sécurité -->
@@ -2553,11 +2535,13 @@
                     text-align: center;
                 ">
                     <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 0.5rem;">
-                        <i class="fas fa-lock" style="color: #d4ac0d;"></i>
-                        <strong style="color: #856404;">Document sécurisé</strong>
+                        <i class="fas fa-shield-alt" style="color: #d4ac0d; font-size: 1.2rem;"></i>
+                        <strong style="color: #856404; font-size: 1.1rem;">Document Protégé</strong>
                     </div>
-                    <p style="color: #856404; margin: 0; font-size: 0.9rem;">
-                        Ce document est une simulation. La copie et le téléchargement sont désactivés.
+                    <p style="color: #856404; margin: 0; font-size: 0.95rem; line-height: 1.6;">
+                        🚫 <strong>La copie, le téléchargement et l'impression sont désactivés.</strong><br>
+                        Ce document est uniquement disponible en consultation pour démonstration.<br>
+                        Pour obtenir une version complète et personnalisée, contactez-nous.
                     </p>
                 </div>
             </div>
@@ -2598,15 +2582,130 @@
         </div>
 
         <!-- Indicateur de sécurité -->
-        <div style="text-align: center; margin-top: 3rem; color: #6c757d; font-size: 0.9rem;">
-            <i class="fas fa-shield-alt"></i> Tous les documents sont sécurisés et ne peuvent être copiés ou téléchargés
+        <div style="text-align: center; margin-top: 3rem; padding: 1.5rem; background: #f8f9fa; border-radius: 10px;">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; color: #495057; font-size: 1rem; font-weight: 600;">
+                <i class="fas fa-lock" style="color: #28a745;"></i>
+                <span>Protection Active</span>
+            </div>
+            <p style="margin: 0.5rem 0 0 0; color: #6c757d; font-size: 0.9rem;">
+                Tous les documents sont protégés contre la copie, le téléchargement et l'impression non autorisée
+            </p>
         </div>
     </div>
 </section>
 
+<!-- Modal de demande de document -->
+<div id="requestModal" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.7);">
+    <div style="background-color: white; margin: 2% auto; padding: 0; border-radius: 15px; max-width: 600px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); position: relative;">
+        <!-- Header du modal -->
+        <div style="background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%); padding: 2rem; border-radius: 15px 15px 0 0; position: relative;">
+            <button onclick="closeModal()" style="position: absolute; top: 1rem; right: 1rem; background: rgba(255,255,255,0.2); border: none; color: white; font-size: 1.5rem; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; transition: all 0.3s;"
+                onmouseover="this.style.background='rgba(255,255,255,0.3)'"
+                onmouseout="this.style.background='rgba(255,255,255,0.2)'">
+                ×
+            </button>
+            <h2 style="color: white; margin: 0; font-size: 1.8rem;">
+                <i class="fas fa-file-download"></i> Demander ce document
+            </h2>
+            <p style="color: rgba(255,255,255,0.9); margin: 0.5rem 0 0 0;">
+                Remplissez le formulaire ci-dessous pour recevoir ce document personnalisé
+            </p>
+        </div>
 
+        <!-- Contenu du modal -->
+        <div style="padding: 2rem;">
+            <form id="documentRequestForm">
+                @csrf
+                <input type="hidden" id="modal-document-type" name="document_type">
+                <input type="hidden" id="modal-document-title" name="document_title">
 
+                <!-- Nom et Prénom -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+                    <div>
+                        <label style="display: block; font-weight: 600; color: #2c3e50; margin-bottom: 0.5rem;">
+                            Nom <span style="color: #e74c3c;">*</span>
+                        </label>
+                        <input type="text" name="nom" required style="width: 100%; padding: 0.75rem; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; transition: all 0.3s;"
+                            onfocus="this.style.borderColor='var(--primary-blue)'"
+                            onblur="this.style.borderColor='#e0e0e0'"
+                            placeholder="Votre nom">
+                    </div>
+                    <div>
+                        <label style="display: block; font-weight: 600; color: #2c3e50; margin-bottom: 0.5rem;">
+                            Prénom <span style="color: #e74c3c;">*</span>
+                        </label>
+                        <input type="text" name="prenom" required style="width: 100%; padding: 0.75rem; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; transition: all 0.3s;"
+                            onfocus="this.style.borderColor='var(--primary-blue)'"
+                            onblur="this.style.borderColor='#e0e0e0'"
+                            placeholder="Votre prénom">
+                    </div>
+                </div>
 
+                <!-- Email et Téléphone -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+                    <div>
+                        <label style="display: block; font-weight: 600; color: #2c3e50; margin-bottom: 0.5rem;">
+                            Email <span style="color: #e74c3c;">*</span>
+                        </label>
+                        <input type="email" name="email" required style="width: 100%; padding: 0.75rem; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; transition: all 0.3s;"
+                            onfocus="this.style.borderColor='var(--primary-blue)'"
+                            onblur="this.style.borderColor='#e0e0e0'"
+                            placeholder="exemple@email.com">
+                    </div>
+                    <div>
+                        <label style="display: block; font-weight: 600; color: #2c3e50; margin-bottom: 0.5rem;">
+                            Téléphone <span style="color: #e74c3c;">*</span>
+                        </label>
+                        <input type="tel" name="telephone" required style="width: 100%; padding: 0.75rem; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; transition: all 0.3s;"
+                            onfocus="this.style.borderColor='var(--primary-blue)'"
+                            onblur="this.style.borderColor='#e0e0e0'"
+                            placeholder="+229 XX XX XX XX">
+                    </div>
+                </div>
+
+                <!-- Entreprise (optionnel) -->
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; font-weight: 600; color: #2c3e50; margin-bottom: 0.5rem;">
+                        Entreprise <span style="color: #95a5a6; font-weight: 400;">(optionnel)</span>
+                    </label>
+                    <input type="text" name="entreprise" style="width: 100%; padding: 0.75rem; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; transition: all 0.3s;"
+                        onfocus="this.style.borderColor='var(--primary-blue)'"
+                        onblur="this.style.borderColor='#e0e0e0'"
+                        placeholder="Nom de votre entreprise">
+                </div>
+
+                <!-- Description -->
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; font-weight: 600; color: #2c3e50; margin-bottom: 0.5rem;">
+                        Détails de votre demande <span style="color: #e74c3c;">*</span>
+                    </label>
+                    <textarea name="description" required rows="4" style="width: 100%; padding: 0.75rem; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; resize: vertical; font-family: inherit; transition: all 0.3s;"
+                        onfocus="this.style.borderColor='var(--primary-blue)'"
+                        onblur="this.style.borderColor='#e0e0e0'"
+                        placeholder="Décrivez votre besoin et les spécificités que vous souhaitez pour ce document (minimum 20 caractères)..."></textarea>
+                    <small style="color: #7f8c8d; font-size: 0.85rem;">Minimum 20 caractères</small>
+                </div>
+
+                <!-- Message d'erreur/succès -->
+                <div id="formMessage" style="display: none; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;"></div>
+
+                <!-- Boutons -->
+                <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+                    <button type="button" onclick="closeModal()" style="padding: 0.75rem 1.5rem; background: #ecf0f1; color: #2c3e50; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s;"
+                        onmouseover="this.style.background='#d5dbdb'"
+                        onmouseout="this.style.background='#ecf0f1'">
+                        Annuler
+                    </button>
+                    <button type="submit" id="submitBtn" style="padding: 0.75rem 2rem; background: var(--primary-blue); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 0.5rem;"
+                        onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 15px rgba(30, 90, 168, 0.3)'"
+                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                        <i class="fas fa-paper-plane"></i> Envoyer ma demande
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 
     <!-- Footer -->
@@ -2708,112 +2807,6 @@
 
 
     <script>
-// Données des documents de démonstration
-const documentsData = {
-    immobilier: {
-        title: "Contrat de Location d'Habitation",
-        description: "Document type pour la location d'un logement meublé ou non meublé",
-        content: `
-            <h4 style="text-align: center; margin-bottom: 2rem; color: #2c3e50;">CONTRAT DE LOCATION D'HABITATION</h4>
-
-            <p><strong>ENTRE LES SOUSSIGNÉS :</strong></p>
-
-            <p>Le Bailleur : [Nom et adresse du bailleur]</p>
-            <p>Le Locataire : [Nom et adresse du locataire]</p>
-
-            <p style="margin-top: 2rem;"><strong>IL A ÉTÉ CONVENU CE QUI SUIT :</strong></p>
-
-            <p><strong>Article 1 - Objet du contrat</strong><br>
-            Le présent contrat a pour objet la location du logement situé à [adresse complète],
-            comprenant [description des pièces], d'une surface habitable de [surface] m².</p>
-
-            <p><strong>Article 2 - Durée du contrat</strong><br>
-            Le présent contrat est conclu pour une durée de [durée] à compter du [date de début].</p>
-
-            <p><strong>Article 3 - Loyer et charges</strong><br>
-            Le loyer mensuel est fixé à [montant] euros hors charges.<br>
-            Une provision sur charges de [montant] euros est due chaque mois.</p>
-
-            <p><strong>Article 4 - Caution</strong><br>
-            Le locataire verse une caution d'un montant de [montant] euros lors de la signature du présent contrat.</p>
-
-            <p><strong>Article 5 - État des lieux</strong><br>
-            Un état des lieux contradictoire sera établi à l'entrée et à la sortie des lieux.</p>
-
-            <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e9ecef;">
-                <p><em>Ce document est une simulation. La version complète comprend 12 articles détaillés
-                et les clauses spécifiques adaptées à votre situation.</em></p>
-            </div>
-        `
-    },
-    travail: {
-        title: "Contrat de Travail à Durée Indéterminée",
-        description: "Modèle de contrat CDI conforme au Code du travail",
-        content: `
-            <h4 style="text-align: center; margin-bottom: 2rem; color: #2c3e50;">CONTRAT DE TRAVAIL À DURÉE INDÉTERMINÉE</h4>
-
-            <p><strong>ENTRE :</strong></p>
-            <p>L'employeur : [Nom et adresse de l'entreprise]</p>
-            <p>Le salarié : [Nom et adresse du salarié]</p>
-
-            <p style="margin-top: 2rem;"><strong>IL EST CONVENU CE QUI SUIT :</strong></p>
-
-            <p><strong>Article 1 - Fonctions</strong><br>
-            Le salarié est engagé en qualité de [intitulé du poste] et exercera les fonctions suivantes :
-            [description des missions].</p>
-
-            <p><strong>Article 2 - Durée du travail</strong><br>
-            La durée du travail est fixée à [nombre] heures par semaine, répartie comme suit :
-            [détail de l'organisation].</p>
-
-            <p><strong>Article 3 - Rémunération</strong><br>
-            Le salaire mensuel brut est fixé à [montant] euros, payable mensuellement.</p>
-
-            <p><strong>Article 4 - Période d'essai</strong><br>
-            Une période d'essai de [durée] est prévue, renouvelable une fois.</p>
-
-            <p><strong>Article 5 - Congés payés</strong><br>
-            Le salarié bénéficie de 2,5 jours ouvrables de congés payés par mois de travail effectif.</p>
-
-            <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e9ecef;">
-                <p><em>Document de démonstration - La version complète comprend les clauses spécifiques
-                à votre convention collective et les annexes obligatoires.</em></p>
-            </div>
-        `
-    },
-    entreprise: {
-        title: "Statuts de Société SARL",
-        description: "Modèle de statuts pour la création d'une SARL",
-        content: `
-            <h4 style="text-align: center; margin-bottom: 2rem; color: #2c3e50;">STATUTS DE LA SOCIÉTÉ [NOM DE LA SOCIÉTÉ]</h4>
-            <h5 style="text-align: center; margin-bottom: 2rem; color: #2c3e50;">Société à Responsabilité Limitée</h5>
-
-            <p><strong>ARTICLE PREMIER - FORME</strong><br>
-            Les associés fondateurs créent une Société à Responsabilité Limitée régie par les présents statuts.</p>
-
-            <p><strong>ARTICLE 2 - DÉNOMINATION SOCIALE</strong><br>
-            La dénomination sociale de la société est : [Dénomination sociale].</p>
-
-            <p><strong>ARTICLE 3 - OBJET SOCIAL</strong><br>
-            L'objet social de la société est : [Description de l'activité].</p>
-
-            <p><strong>ARTICLE 4 - SIÈGE SOCIAL</strong><br>
-            Le siège social est fixé à : [Adresse complète du siège].</p>
-
-            <p><strong>ARTICLE 5 - DURÉE</strong><br>
-            La durée de la société est fixée à [nombre] années à compter de son immatriculation.</p>
-
-            <p><strong>ARTICLE 6 - CAPITAL SOCIAL</strong><br>
-            Le capital social est fixé à la somme de [montant] euros, divisé en [nombre] parts sociales.</p>
-
-            <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e9ecef;">
-                <p><em>Simulation partielle - Les statuts complets comportent 25 articles détaillant
-                l'organisation et le fonctionnement de votre société.</em></p>
-            </div>
-        `
-    }
-};
-
 // Fonctions de gestion
 function selectCategory(category) {
     // Mise à jour visuelle des cartes
@@ -2826,11 +2819,73 @@ function selectCategory(category) {
     selectedCard.style.borderColor = 'var(--primary-blue)';
     selectedCard.style.transform = 'translateY(-5px)';
 
-    // Affichage du document
-    const documentData = documentsData[category];
-    document.getElementById('document-title').textContent = documentData.title;
-    document.getElementById('document-description').textContent = documentData.description;
-    document.getElementById('document-content').innerHTML = documentData.content;
+    // Titres personnalisés par catégorie
+    const titles = {
+        'immobilier': 'Notes Usage - Conseils Juridiques Immobilier',
+        'travail': 'Notes Usage - Conseils Juridiques Droit du Travail',
+        'entreprise': 'Notes Usage - Conseils Juridiques Entreprise'
+    };
+
+    const descriptions = {
+        'immobilier': 'Consultez ce document pour obtenir des conseils juridiques en matière immobilière.',
+        'travail': 'Consultez ce document pour obtenir des conseils juridiques en droit du travail.',
+        'entreprise': 'Consultez ce document pour obtenir des conseils juridiques pour votre entreprise.'
+    };
+
+    // Affichage du document PDF
+    document.getElementById('document-title').textContent = titles[category];
+    document.getElementById('document-description').textContent = descriptions[category];
+    
+    // Afficher le PDF dans un iframe avec protection
+    document.getElementById('document-content').innerHTML = `
+        <div id="pdf-wrapper" style="position: relative; width: 100%; height: 800px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); background: #f5f5f5;">
+            <iframe 
+                id="pdf-viewer"
+                src="{{ asset('documents/Notes_ Usage_conseils_juridique.pdf') }}#toolbar=0&navpanes=0&view=FitH" 
+                style="
+                    width: 100%;
+                    height: 100%;
+                    border: none;
+                "
+                title="Document PDF - ${titles[category]}"
+            ></iframe>
+        </div>
+    `;
+    
+    // Ajouter les protections après chargement
+    setTimeout(() => {
+        const pdfWrapper = document.getElementById('pdf-wrapper');
+        const pdfViewer = document.getElementById('pdf-viewer');
+        
+        if (pdfWrapper && pdfViewer) {
+            // Bloquer le clic droit sur le wrapper
+            pdfWrapper.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                alert('⚠️ Le clic droit est désactivé pour protéger ce document.');
+                return false;
+            }, true);
+            
+            // Protections CSS anti-sélection sur le wrapper
+            pdfWrapper.style.userSelect = 'none';
+            pdfWrapper.style.webkitUserSelect = 'none';
+            pdfWrapper.style.mozUserSelect = 'none';
+            pdfWrapper.style.msUserSelect = 'none';
+            pdfWrapper.style.webkitTouchCallout = 'none';
+            
+            // Bloquer les événements de copie
+            ['copy', 'cut'].forEach(eventType => {
+                pdfWrapper.addEventListener(eventType, function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (eventType === 'copy') {
+                        alert('⚠️ La copie est désactivée pour protéger ce document.');
+                    }
+                    return false;
+                }, true);
+            });
+        }
+    }, 500);
 
     // Transition
     document.querySelector('.categories-grid').style.display = 'none';
@@ -2852,39 +2907,261 @@ function backToCategories() {
 }
 
 function requestDocument() {
-    // Redirection vers le formulaire de contact avec pré-remplissage
-    window.location.href = '#contact?document=' + encodeURIComponent(document.getElementById('document-title').textContent);
+    // Afficher le modal de demande
+    const documentTitle = document.getElementById('document-title').textContent;
+    const documentType = document.querySelector('.category-card[style*="translateY(-5px)"]')?.dataset.category || 'general';
+    
+    // Pré-remplir les champs cachés
+    document.getElementById('modal-document-type').value = documentType;
+    document.getElementById('modal-document-title').value = documentTitle;
+    
+    // Afficher le modal
+    document.getElementById('requestModal').style.display = 'block';
+    document.body.style.overflow = 'hidden'; // Bloquer le scroll de la page
 }
 
-// Sécurité : Bloquer la sélection de texte et le clic droit
+// Sécurité : Bloquer la sélection de texte et le clic droit sur toute la page
 document.addEventListener('DOMContentLoaded', function() {
     const documentContainer = document.querySelector('.document-container');
+    
+    if (documentContainer) {
+        // Bloquer la sélection
+        documentContainer.style.userSelect = 'none';
+        documentContainer.style.webkitUserSelect = 'none';
+        documentContainer.style.mozUserSelect = 'none';
+        documentContainer.style.msUserSelect = 'none';
 
-    // Bloquer la sélection
-    documentContainer.style.userSelect = 'none';
-    documentContainer.style.webkitUserSelect = 'none';
-    documentContainer.style.mozUserSelect = 'none';
-    documentContainer.style.msUserSelect = 'none';
+        // Bloquer le clic droit
+        documentContainer.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            alert('⚠️ Le téléchargement et la copie sont désactivés pour protéger ce document.');
+            return false;
+        });
 
-    // Bloquer le clic droit
-    documentContainer.addEventListener('contextmenu', function(e) {
-        e.preventDefault();
-        return false;
-    });
-
-    // Bloquer le drag and drop
-    documentContainer.addEventListener('dragstart', function(e) {
-        e.preventDefault();
-        return false;
-    });
+        // Bloquer le drag and drop
+        documentContainer.addEventListener('dragstart', function(e) {
+            e.preventDefault();
+            return false;
+        });
+        
+        // Bloquer la copie directement sur le conteneur
+        documentContainer.addEventListener('copy', function(e) {
+            e.preventDefault();
+            e.clipboardData.setData('text/plain', '');
+            alert('⚠️ La copie est désactivée pour protéger ce document.');
+            return false;
+        });
+    }
 });
 
-// Empêcher l'impression de la section document
-window.addEventListener('beforeprint', function() {
+// Bloquer les raccourcis clavier - PROTECTION GLOBALE
+document.addEventListener('keydown', function(e) {
     const viewer = document.getElementById('document-viewer');
-    if (viewer.style.display !== 'none') {
-        alert('La copie de ce document est protégée. Contactez-nous pour obtenir une version officielle.');
-        window.print = function(){}; // Désactiver l'impression
+    const isViewerVisible = viewer && viewer.style.display !== 'none';
+    
+    // Si le viewer est visible, bloquer tous ces raccourcis
+    if (isViewerVisible) {
+        // Bloquer Ctrl+C (copier)
+        if (e.ctrlKey && (e.key === 'c' || e.key === 'C' || e.keyCode === 67)) {
+            e.preventDefault();
+            e.stopPropagation();
+            alert('⚠️ La copie est désactivée pour protéger le document.');
+            return false;
+        }
+        
+        // Bloquer Ctrl+A (tout sélectionner)
+        if (e.ctrlKey && (e.key === 'a' || e.key === 'A' || e.keyCode === 65)) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        }
+        
+        // Bloquer Ctrl+P (imprimer)
+        if (e.ctrlKey && (e.key === 'p' || e.key === 'P' || e.keyCode === 80)) {
+            e.preventDefault();
+            e.stopPropagation();
+            alert('⚠️ L\'impression est désactivée pour protéger le document.');
+            return false;
+        }
+        
+        // Bloquer Ctrl+S (sauvegarder)
+        if (e.ctrlKey && (e.key === 's' || e.key === 'S' || e.keyCode === 83)) {
+            e.preventDefault();
+            e.stopPropagation();
+            alert('⚠️ La sauvegarde est désactivée pour protéger le document.');
+            return false;
+        }
+        
+        // Bloquer Ctrl+U (voir source)
+        if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.keyCode === 85)) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        }
+        
+        // Bloquer F12 et Ctrl+Shift+I (DevTools)
+        if (e.key === 'F12' || e.keyCode === 123 || 
+            (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.keyCode === 73))) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        }
+    }
+}, true); // true = capture phase pour bloquer avant tout
+
+// Bloquer l'événement copy globalement
+document.addEventListener('copy', function(e) {
+    const viewer = document.getElementById('document-viewer');
+    if (viewer && viewer.style.display !== 'none') {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        if (e.clipboardData) {
+            e.clipboardData.setData('text/plain', '');
+            e.clipboardData.setData('text/html', '');
+        }
+        alert('⚠️ La copie est désactivée pour protéger le document.');
+        return false;
+    }
+}, true);
+
+// Bloquer l'événement cut
+document.addEventListener('cut', function(e) {
+    const viewer = document.getElementById('document-viewer');
+    if (viewer && viewer.style.display !== 'none') {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        return false;
+    }
+}, true);
+
+// Surveiller le presse-papier et le vider si document visible
+setInterval(function() {
+    const viewer = document.getElementById('document-viewer');
+    if (viewer && viewer.style.display !== 'none') {
+        // Essayer de vider le presse-papier (ne fonctionne que sur certains navigateurs)
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText('').catch(() => {});
+        }
+    }
+}, 500);
+
+// Bloquer la commande execCommand pour la copie
+const originalExecCommand = document.execCommand;
+document.execCommand = function(command) {
+    const viewer = document.getElementById('document-viewer');
+    if (viewer && viewer.style.display !== 'none') {
+        if (command === 'copy' || command === 'cut' || command === 'paste') {
+            alert('⚠️ Cette action est désactivée pour protéger le document.');
+            return false;
+        }
+    }
+    return originalExecCommand.apply(this, arguments);
+};
+
+// Empêcher l'impression du document
+window.addEventListener('beforeprint', function(e) {
+    const viewer = document.getElementById('document-viewer');
+    if (viewer && viewer.style.display !== 'none') {
+        e.preventDefault();
+        alert('🔒 L\'impression de ce document est protégée.\n\nContactez-nous pour obtenir une version officielle.');
+        return false;
+    }
+});
+
+// Désactiver le clic droit sur tout le document
+document.addEventListener('contextmenu', function(e) {
+    const viewer = document.getElementById('document-viewer');
+    if (viewer && viewer.style.display !== 'none') {
+        e.preventDefault();
+        return false;
+    }
+});
+
+// Fonction pour fermer le modal
+function closeModal() {
+    document.getElementById('requestModal').style.display = 'none';
+    document.body.style.overflow = 'auto';
+    document.getElementById('documentRequestForm').reset();
+    document.getElementById('formMessage').style.display = 'none';
+}
+
+// Fermer le modal si on clique en dehors
+window.onclick = function(event) {
+    const modal = document.getElementById('requestModal');
+    if (event.target == modal) {
+        closeModal();
+    }
+}
+
+// Gérer la soumission du formulaire
+document.getElementById('documentRequestForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const submitBtn = document.getElementById('submitBtn');
+    const formMessage = document.getElementById('formMessage');
+    const originalBtnText = submitBtn.innerHTML;
+    
+    // Désactiver le bouton et afficher le loading
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
+    formMessage.style.display = 'none';
+    
+    try {
+        const formData = new FormData(this);
+        const response = await fetch('{{ route("document-request.store") }}', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+            }
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            // Succès
+            formMessage.style.display = 'block';
+            formMessage.style.background = '#d4edda';
+            formMessage.style.color = '#155724';
+            formMessage.style.border = '1px solid #c3e6cb';
+            formMessage.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fas fa-check-circle" style="font-size: 1.2rem;"></i>
+                    <div>
+                        <strong>Succès!</strong><br>
+                        ${data.message}
+                    </div>
+                </div>
+            `;
+            
+            // Réinitialiser le formulaire après 2 secondes
+            setTimeout(() => {
+                closeModal();
+            }, 3000);
+        } else {
+            throw new Error(data.message || 'Une erreur est survenue');
+        }
+    } catch (error) {
+        // Erreur
+        formMessage.style.display = 'block';
+        formMessage.style.background = '#f8d7da';
+        formMessage.style.color = '#721c24';
+        formMessage.style.border = '1px solid #f5c6cb';
+        formMessage.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <i class="fas fa-exclamation-circle" style="font-size: 1.2rem;"></i>
+                <div>
+                    <strong>Erreur!</strong><br>
+                    ${error.message || 'Une erreur est survenue lors de l\'envoi. Veuillez réessayer.'}
+                </div>
+            </div>
+        `;
+        
+        // Réactiver le bouton
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnText;
     }
 });
 </script>

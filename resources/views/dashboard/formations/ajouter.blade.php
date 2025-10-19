@@ -29,7 +29,7 @@
                     </h6>
                 </div>
                 <div class="card-body">
-                    <form action="#" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('dashboard.formations.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-md-6">
@@ -79,6 +79,56 @@
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="category_id" class="form-label font-weight-bold">
+                                        <i class="fas fa-folder mr-1"></i>
+                                        Catégorie
+                                    </label>
+                                    <select class="form-control" id="category_id" name="category_id">
+                                        <option value="">Sélectionner une catégorie</option>
+                                        @foreach(\App\Models\FormationCategory::all() as $category)
+                                            <option value="{{ $category->id }}">{{ $category->nom }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="nombre_lecons" class="form-label font-weight-bold">
+                                        <i class="fas fa-play-circle mr-1"></i>
+                                        Nombre de leçons
+                                    </label>
+                                    <input type="number" class="form-control" id="nombre_lecons" name="nombre_lecons" placeholder="Ex: 15">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="image" class="form-label font-weight-bold">
+                                        <i class="fas fa-image mr-1"></i>
+                                        Image de la formation
+                                    </label>
+                                    <input type="file" class="form-control-file" id="image" name="image" accept="image/*">
+                                    <small class="form-text text-muted">Formats acceptés: JPG, PNG, WEBP. Taille recommandée: 800x600px</small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="custom-control custom-checkbox mt-4">
+                                        <input type="checkbox" class="custom-control-input" id="populaire" name="populaire">
+                                        <label class="custom-control-label font-weight-bold" for="populaire">
+                                            <i class="fas fa-fire mr-1 text-danger"></i>
+                                            Formation populaire
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <label for="description" class="form-label font-weight-bold">
                                 <i class="fas fa-align-left mr-1"></i>
@@ -93,37 +143,6 @@
                                 Objectifs pédagogiques
                             </label>
                             <textarea class="form-control" id="objectifs" name="objectifs" rows="3" placeholder="Listez les compétences que les participants acquerront..."></textarea>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="date_debut" class="form-label font-weight-bold">
-                                        <i class="fas fa-calendar-alt mr-1"></i>
-                                        Date de début
-                                    </label>
-                                    <input type="date" class="form-control" id="date_debut" name="date_debut" required>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="places_max" class="form-label font-weight-bold">
-                                        <i class="fas fa-users mr-1"></i>
-                                        Nombre de places maximum
-                                    </label>
-                                    <input type="number" class="form-control" id="places_max" name="places_max" required placeholder="Ex: 20">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="active" name="active" checked>
-                                <label class="custom-control-label font-weight-bold" for="active">
-                                    <i class="fas fa-check-circle mr-1"></i>
-                                    Formation active
-                                </label>
-                            </div>
                         </div>
 
                         <hr>

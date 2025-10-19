@@ -14,6 +14,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('phone')->nullable();
             $table->text('message');
+            $table->enum('status', ['unread', 'read'])->default('unread');
             $table->timestamps();
         });
     }

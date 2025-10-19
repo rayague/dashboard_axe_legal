@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('location')->nullable();
             $table->string('image')->nullable();
             $table->boolean('published')->default(true);
+            $table->foreignId('organizer_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

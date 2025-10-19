@@ -38,51 +38,10 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Consultations Totales</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">2,847</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalConsultations }}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-gavel fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Revenus Générés</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">68.5M FCFA</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-info shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Taux Satisfaction</div>
-                            <div class="row no-gutters align-items-center">
-                                <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">94%</div>
-                                </div>
-                                <div class="col">
-                                    <div class="progress progress-sm mr-2">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 94%"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-thumbs-up fa-2x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
@@ -94,10 +53,32 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Durée Moyenne</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">42 min</div>
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">En Attente</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $pendingConsultations }}</div>
                         </div>
                         <div class="col-auto">
+                            <i class="fas fa-clock fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Complétées</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $completedConsultations }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-check-circle fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
                             <i class="fas fa-clock fa-2x text-gray-300"></i>
                         </div>
                     </div>
@@ -228,61 +209,97 @@
                                     <th><input type="checkbox" id="selectAll"></th>
                                     <th>Date</th>
                                     <th>Client</th>
-                                    <th>Avocat</th>
-                                    <th>Domaine</th>
+                                    <th>Téléphone</th>
+                                    <th>Type</th>
                                     <th>Sujet</th>
-                                    <th>Durée</th>
-                                    <th>Montant</th>
+                                    <th>RDV Planifié</th>
                                     <th>Statut</th>
-                                    <th>Satisfaction</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @forelse($consultations as $consultation)
                                 <tr>
-                                    <td><input type="checkbox" class="consultation-checkbox" value="1"></td>
-                                    <td>01/10/2025 14:30</td>
+                                    <td><input type="checkbox" class="consultation-checkbox" value="{{ $consultation->id }}"></td>
+                                    <td>{{ $consultation->created_at->format('d/m/Y H:i') }}</td>
                                     <td>
                                         <div class="d-flex align-items-center">
-                                            <div class="avatar-circle bg-primary text-white mr-2">SB</div>
+                                            <div class="avatar-circle bg-primary text-white mr-2">
+                                                {{ strtoupper(substr($consultation->name, 0, 2)) }}
+                                            </div>
                                             <div>
-                                                <div class="font-weight-bold">Sophie Bernard</div>
-                                                <small class="text-muted">sophie.bernard@email.com</small>
+                                                <div class="font-weight-bold">{{ $consultation->name }}</div>
+                                                <small class="text-muted">{{ $consultation->email }}</small>
                                             </div>
                                         </div>
                                     </td>
-                                    <td>Me Marie Dubois</td>
-                                    <td><span class="badge badge-primary">Droit du travail</span></td>
-                                    <td>Litige avec employeur</td>
-                                    <td>45 min</td>
-                                    <td class="font-weight-bold text-success">35 000 FCFA</td>
-                                    <td><span class="badge badge-success">Terminée</span></td>
+                                    <td>{{ $consultation->phone ?? 'N/A' }}</td>
                                     <td>
-                                        <div class="d-flex align-items-center">
-                                            <div class="rating-stars mr-2">
-                                                <i class="fas fa-star text-warning"></i>
-                                                <i class="fas fa-star text-warning"></i>
-                                                <i class="fas fa-star text-warning"></i>
-                                                <i class="fas fa-star text-warning"></i>
-                                                <i class="fas fa-star text-warning"></i>
-                                            </div>
-                                            <small class="text-muted">5.0</small>
-                                        </div>
+                                        @if($consultation->consultation_type)
+                                            <span class="badge badge-info">
+                                                <i class="fas fa-{{ $consultation->consultation_type === 'presentiel' ? 'user' : 'phone' }}"></i>
+                                                {{ ucfirst($consultation->consultation_type) }}
+                                            </span>
+                                        @else
+                                            <span class="badge badge-secondary">Non spécifié</span>
+                                        @endif
+                                    </td>
+                                    <td>{{ Str::limit($consultation->subject, 50) ?? 'Aucun sujet' }}</td>
+                                    <td>
+                                        @if($consultation->scheduled_at)
+                                            {{ \Carbon\Carbon::parse($consultation->scheduled_at)->format('d/m/Y H:i') }}
+                                        @else
+                                            <span class="text-muted">Non planifié</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($consultation->status === 'completed')
+                                            <span class="badge badge-success">Complétée</span>
+                                        @elseif($consultation->status === 'cancelled')
+                                            <span class="badge badge-danger">Annulée</span>
+                                        @elseif($consultation->status === 'pending')
+                                            <span class="badge badge-warning">En attente</span>
+                                        @else
+                                            <span class="badge badge-info">Nouvelle</span>
+                                        @endif
                                     </td>
                                     <td>
                                         <div class="btn-group" role="group">
-                                            <button class="btn btn-info btn-sm" onclick="viewConsultation(1)" title="Voir détails">
+                                            <button class="btn btn-info btn-sm" onclick="viewConsultation({{ $consultation->id }})" title="Voir détails">
                                                 <i class="fas fa-eye"></i>
                                             </button>
-                                            <button class="btn btn-success btn-sm" onclick="downloadReport(1)" title="Télécharger rapport">
-                                                <i class="fas fa-download"></i>
-                                            </button>
-                                            <button class="btn btn-warning btn-sm" onclick="sendFollowUp(1)" title="Suivi">
-                                                <i class="fas fa-paper-plane"></i>
-                                            </button>
+                                            <a href="mailto:{{ $consultation->email }}" class="btn btn-success btn-sm" title="Envoyer un email">
+                                                <i class="fas fa-envelope"></i>
+                                            </a>
+                                            <a href="tel:{{ $consultation->phone }}" class="btn btn-warning btn-sm" title="Appeler">
+                                                <i class="fas fa-phone"></i>
+                                            </a>
                                         </div>
                                     </td>
                                 </tr>
+                                @empty
+                                <tr>
+                                    <td colspan="9" class="text-center py-4">
+                                        <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+                                        <p class="text-muted mb-0">Aucune consultation enregistrée pour le moment</p>
+                                    </td>
+                                </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div class="d-flex justify-content-between align-items-center mt-3 px-3 pb-3">
+                        <div class="text-muted">
+                            Affichage de {{ $consultations->firstItem() ?? 0 }} à {{ $consultations->lastItem() ?? 0 }} sur {{ $consultations->total() }} consultations
+                        </div>
+                        <div>
+                            {{ $consultations->links() }}
+                        </div>
+                    </div>
+                </div>
+            </div>
                                 <tr>
                                     <td><input type="checkbox" class="consultation-checkbox" value="2"></td>
                                     <td>30/09/2025 10:15</td>

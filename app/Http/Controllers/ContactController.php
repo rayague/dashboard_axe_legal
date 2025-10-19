@@ -13,7 +13,7 @@ use Illuminate\Http\RedirectResponse;
 
 class ContactController extends Controller
 {
-    public function submitContact(ContactRequest $request): RedirectResponse
+    public function submitContact(ContactRequest $request)
     {
         $data = $request->validated();
 
@@ -22,6 +22,14 @@ class ContactController extends Controller
         // Send notification to site admin (MAIL_TO env or fallback)
         $to = config('mail.from.address');
         Mail::to($to)->send(new ContactReceived($data));
+
+        // Return JSON for AJAX requests
+        if ($request->wantsJson() || $request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Merci, votre message a été envoyé.'
+            ]);
+        }
 
         return redirect()->back()->with('status', 'Merci, votre message a été envoyé.');
     }

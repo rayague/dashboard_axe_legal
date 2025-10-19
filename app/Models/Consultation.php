@@ -15,6 +15,7 @@ class Consultation extends Model
         'phone',
         'subject',
         'message',
+        'consultation_type',
         'scheduled_at',
     ];
 }

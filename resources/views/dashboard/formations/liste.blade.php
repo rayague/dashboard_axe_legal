@@ -33,7 +33,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Total Formations</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">24</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $formations->count() }}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-graduation-cap fa-2x text-gray-300"></i>
@@ -98,6 +98,196 @@
             <h6 class="m-0 font-weight-bold text-primary">
                 <i class="fas fa-table mr-2"></i>
                 Formations Disponibles
+            </h6>
+            <div class="ml-auto">
+                <div class="dropdown d-inline-block">
+                    <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
+                        <i class="fas fa-download mr-1"></i> Exporter
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{{ route('dashboard.formations.export', 'pdf') }}">
+                            <i class="fas fa-file-pdf text-danger mr-1"></i> PDF
+                        </a>
+                        <a class="dropdown-item" href="{{ route('dashboard.formations.export', 'excel') }}">
+                            <i class="fas fa-file-excel text-success mr-1"></i> Excel
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            @if(session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('success') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+
+            <!-- Filtres de recherche -->
+            <form action="{{ route('dashboard.formations.liste') }}" method="GET" class="mb-4">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="search">Rechercher</label>
+                            <input type="text" class="form-control" id="search" name="search" 
+                                   value="{{ request('search') }}" placeholder="Titre ou description...">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="niveau">Niveau</label>
+                            <select class="form-control" id="niveau" name="niveau">
+                                <option value="">Tous les niveaux</option>
+                                <option value="debutant" {{ request('niveau') == 'debutant' ? 'selected' : '' }}>Débutant</option>
+                                <option value="intermediaire" {{ request('niveau') == 'intermediaire' ? 'selected' : '' }}>Intermédiaire</option>
+                                <option value="avance" {{ request('niveau') == 'avance' ? 'selected' : '' }}>Avancé</option>
+                                <option value="expert" {{ request('niveau') == 'expert' ? 'selected' : '' }}>Expert</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="prix_min">Prix min</label>
+                            <input type="number" class="form-control" id="prix_min" name="prix_min" 
+                                   value="{{ request('prix_min') }}" placeholder="Min">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="prix_max">Prix max</label>
+                            <input type="number" class="form-control" id="prix_max" name="prix_max" 
+                                   value="{{ request('prix_max') }}" placeholder="Max">
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label class="d-block">&nbsp;</label>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Titre</th>
+                            <th>Description</th>
+                            <th>Durée</th>
+                            <th>Prix</th>
+                            <th>Niveau</th>
+                            <th>Objectifs</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($formations as $formation)
+                            <tr>
+                                <td>{{ $formation->titre }}</td>
+                                <td>{{ Str::limit($formation->description, 100) }}</td>
+                                <td>{{ $formation->duree }}h</td>
+                                <td>{{ number_format($formation->prix, 0, ',', ' ') }} FCFA</td>
+                                <td>
+                                    @switch($formation->niveau)
+                                        @case('debutant')
+                                            <span class="badge badge-success">Débutant</span>
+                                            @break
+                                        @case('intermediaire')
+                                            <span class="badge badge-info">Intermédiaire</span>
+                                            @break
+                                        @case('avance')
+                                            <span class="badge badge-warning">Avancé</span>
+                                            @break
+                                        @case('expert')
+                                            <span class="badge badge-danger">Expert</span>
+                                            @break
+                                    @endswitch
+                                </td>
+                                <td>{{ $formation->objectifs ? Str::limit($formation->objectifs, 100) : 'Non définis' }}</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" 
+                                                data-target="#detailsModal{{ $formation->id }}">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <a href="{{ route('dashboard.formations.edit', $formation) }}" 
+                                           class="btn btn-warning btn-sm">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <form action="{{ route('dashboard.formations.delete', $formation) }}" 
+                                              method="POST" class="d-inline-block">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm" 
+                                                    onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette formation ?')">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+
+                                    <!-- Modal de détails -->
+                                    <div class="modal fade" id="detailsModal{{ $formation->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header bg-warning">
+                                                    <h5 class="modal-title text-white">
+                                                        <i class="fas fa-info-circle mr-2"></i>
+                                                        Détails de la formation
+                                                    </h5>
+                                                    <button type="button" class="close text-white" data-dismiss="modal">
+                                                        <span>&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <dl class="row">
+                                                        <dt class="col-sm-3">Titre</dt>
+                                                        <dd class="col-sm-9">{{ $formation->titre }}</dd>
+
+                                                        <dt class="col-sm-3">Description</dt>
+                                                        <dd class="col-sm-9">{{ $formation->description }}</dd>
+
+                                                        <dt class="col-sm-3">Durée</dt>
+                                                        <dd class="col-sm-9">{{ $formation->duree }} heures</dd>
+
+                                                        <dt class="col-sm-3">Prix</dt>
+                                                        <dd class="col-sm-9">{{ number_format($formation->prix, 0, ',', ' ') }} FCFA</dd>
+
+                                                        <dt class="col-sm-3">Niveau</dt>
+                                                        <dd class="col-sm-9">{{ ucfirst($formation->niveau) }}</dd>
+
+                                                        <dt class="col-sm-3">Objectifs</dt>
+                                                        <dd class="col-sm-9">{{ $formation->objectifs ?: 'Non définis' }}</dd>
+
+                                                        <dt class="col-sm-3">Créée le</dt>
+                                                        <dd class="col-sm-9">{{ $formation->created_at->format('d/m/Y H:i') }}</dd>
+
+                                                        <dt class="col-sm-3">Dernière modification</dt>
+                                                        <dd class="col-sm-9">{{ $formation->updated_at->format('d/m/Y H:i') }}</dd>
+                                                    </dl>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="5" class="text-center">Aucune formation trouvée</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+                
+                <!-- Pagination -->
+                <div class="mt-4">
+                    {{ $formations->withQueryString()->links() }}
+                </div>
+            </div>
             </h6>
             <div class="d-flex flex-column flex-sm-row mt-2 mt-sm-0">
                 <div class="input-group input-group-sm mb-2 mb-sm-0 mr-sm-2" style="width: 250px;">

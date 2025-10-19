@@ -24,16 +24,16 @@
     <link rel="canonical" href="https://www.axe-legal.bj/">
 
     <!-- Favicon & Icônes pour tous les appareils -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('front/assets/images/image8.png')}}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('front/assets/images/image8.png')}}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('front/assets/images/image8.png')}}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('front/assets/images/image8.png')}}">
+    <link rel="icon" type="image/x-icon" href="assets/images/image8.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/image8.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/image8.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/image8.png">
     <link rel="manifest" href="assets/site.webmanifest">
 
     <!-- Open Graph Meta Tags (Pour les réseaux sociaux : Facebook, LinkedIn, etc.) -->
     <meta property="og:title" content="Axe Legal - Cabinet d'Avocats d'Affaires au Bénin">
     <meta property="og:description" content="Votre partenaire juridique de confiance au Bénin. Expertise en droit des affaires, droit des sociétés et contentieux pour les professionnels.">
-    <meta property="og:image" content="{{ asset('front/assets/images/image8.png') }}"><!-- Image optimisée 1200x630px -->
+    <meta property="og:image" content="https://www.axe-legal.bj/assets/images/image8.png"><!-- Image optimisée 1200x630px -->
     <meta property="og:url" content="https://www.axe-legal.bj/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Axe Legal">
@@ -47,10 +47,11 @@
     <meta name="twitter:image" content="https://www.axe-legal.bj/chemin/vers/image-twitter.jpg">
 
     <!-- Feuilles de style et Polices -->
-
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 
     <!-- Schema.org Structured Data (JSON-LD) - TRÈS IMPORTANT -->
     <script type="application/ld+json">
@@ -64,55 +65,80 @@
         "address": {
             "@type": "PostalAddress",
             "streetAddress": "[Adresse]",
-                @forelse($team ?? [] as $member)
-                    <div class="team-card fade-in">
-                        <div class="team-image">
-                            <div class="team-creation">
-                                <div class="team-creation-icon"><i class="fas fa-user-tie"></i></div>
-                                <div class="team-creation-text">
-                                    <h4>{{ $member->name }}</h4>
-                                    <p>{{ $member->role }}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="team-info">
-                            <h3 class="team-name">{{ $member->name }}</h3>
-                            <p class="team-role">{{ $member->role }}</p>
-                            <p class="team-description">{{ $member->bio }}</p>
-                            <div class="team-contact">
-                                @if($member->email)
-                                    <a href="mailto:{{ $member->email }}"><i class="fas fa-envelope"></i></a>
-                                @endif
-                                @if($member->phone)
-                                    <a href="tel:{{ $member->phone }}"><i class="fas fa-phone-alt"></i></a>
-                                @endif
-                                @if($member->whatsapp)
-                                    <a href="{{ $member->whatsapp }}" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                @empty
-                    <div class="team-card fade-in">
-                        <div class="team-image">
-                            <div class="team-creation">
-                                <div class="team-creation-icon"><i class="fas fa-users"></i></div>
-                                <div class="team-creation-text">
-                                    <h4>Notre Équipe</h4>
-                                    <p>Bientôt disponible</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="team-info">
-                            <h3 class="team-name">Equipe Axe Legal</h3>
-                            <p class="team-role">Experts Juridiques</p>
-                            <p class="team-description">Nous ajoutons très bientôt les profils de nos experts.</p>
-                            <div class="team-contact">
-                                <a href="mailto:contact@axe-legal.bj"><i class="fas fa-envelope"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                @endforelse
+            "addressLocality": "[Cotonou, Parakou...]",
+            "addressCountry": "BJ"
+        },
+        "openingHours": "Mo-Fr 08:00-18:00",
+        "areaServed": "Bénin",
+        "serviceType": "Droit des affaires, Droit des sociétés, Droit fiscal, Droit des contrats, Contentieux commercial"
+        }
+    </script>
+
+
+    <style>
+        :root {
+            /* Couleurs principales - Thème clair */
+            --primary-blue: #1E5AA8;
+            --secondary-blue: #2B74D4;
+            --accent-blue: #4A90E2;
+            --light-blue: #E8F2FF;
+            --dark-blue: #0F3A6B;
+
+            /* Couleurs neutres - Thème clair */
+            --dark-gray: #1F2937;
+            --medium-gray: #6B7280;
+            --light-gray: #F8FAFC;
+            --white: #FFFFFF;
+            --text-dark: #1F2937;
+            --text-medium: #4B5563;
+            --text-light: #6B7280;
+            --border-light: #E5E7EB;
+
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --gradient-blue: linear-gradient(135deg, #1E5AA8 0%, #2B74D4 100%);
+            --gradient-light: linear-gradient(135deg, #E8F2FF 0%, #F8FAFC 100%);
+            --gradient-hero: linear-gradient(135deg, #1E5AA8 0%, #2B74D4 50%, #4A90E2 100%);
+            --gradient-card: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+        }
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.7;
+            color: var(--text-dark);
+            background: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--text-dark);
+        }
+
+        /* Header Navigation */
+        .header {
             position: fixed;
             top: 0;
             left: 0;
@@ -262,31 +288,77 @@
         }
 
         .btn {
-            <div class="testimonials-grid">
-                @forelse($testimonials ?? [] as $testimonial)
-                    <div class="testimonial-card fade-in">
-                        <p class="testimonial-quote">{{ $testimonial->content }}</p>
-                        <div class="testimonial-author">
-                            <div class="testimonial-avatar">{{ strtoupper(substr($testimonial->author ?? '', 0, 2)) }}</div>
-                            <div class="testimonial-info">
-                                <h4>{{ $testimonial->author }}</h4>
-                                <p>{{ $testimonial->role }}</p>
-                            </div>
-                        </div>
-                    </div>
-                @empty
-                    <div class="testimonial-card fade-in">
-                        <p class="testimonial-quote">Aucun témoignage disponible pour le moment.</p>
-                        <div class="testimonial-author">
-                            <div class="testimonial-avatar">AL</div>
-                            <div class="testimonial-info">
-                                <h4>Axe Legal</h4>
-                                <p>Faites partie des premiers à laisser un avis.</p>
-                            </div>
-                        </div>
-                    </div>
-                @endforelse
-            </div>
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.6rem 1rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: var(--gradient-hero);
+            color: var(--white);
+            border: none;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .header.scrolled .btn-primary {
+            background: var(--gradient-blue);
+            color: var(--white);
+            border: none;
+            box-shadow: var(--shadow-md);
+            text-shadow: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .header.scrolled .btn-primary:hover {
+            box-shadow: var(--shadow-xl);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-secondary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
             height: 100%;
             background: var(--gradient-hero);
             transition: width 0.3s ease;
@@ -360,7 +432,7 @@
         }
 
         /* Mobile Menu */
-.mobile-menu {
+        .mobile-menu {
             position: fixed;
             top: 0;
             left: 0;
@@ -371,7 +443,7 @@
             background: #FFFFFF !important;
             transform: translateX(-100%);
             opacity: 0;
-            visibility: visible;
+            visibility: hidden;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 9999;
             display: flex;
@@ -379,9 +451,7 @@
             justify-content: center;
             padding-top: 70px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            overflow: auto;
         }
-
 
         .mobile-menu.active {
             transform: translateX(0);
@@ -2563,122 +2633,6 @@
         .carousel-slide.active .carousel-image img {
             transform: scale(1.05);
         }
-
-
-
-        /**********************************************/
-
-        /* Styles responsive pour mobile */
-@media (max-width: 768px) {
-    .announcements-section {
-        padding: 3rem 0.5rem !important;
-    }
-
-    .announcements-grid {
-        grid-template-columns: 1fr !important;
-        gap: 1.5rem !important;
-    }
-
-    .announcement-filters {
-        gap: 0.5rem !important;
-    }
-
-    .filter-btn {
-        padding: 0.6rem 1rem !important;
-        font-size: 0.8rem !important;
-    }
-
-    .newsletter-section {
-        padding: 2rem 1rem !important;
-    }
-
-    .newsletter-section > div {
-        flex-direction: column;
-    }
-}
-
-@media (max-width: 480px) {
-    .announcements-header h2 {
-        font-size: 1.6rem !important;
-    }
-
-    .announcement-card {
-        margin: 0 0.5rem !important;
-    }
-
-    .announcement-card > div:last-child {
-        padding: 1.5rem !important;
-    }
-
-    .action-btn {
-        padding: 0.8rem !important;
-        font-size: 0.9rem !important;
-    }
-
-    /* Ajustement des boutons en colonne sur mobile */
-    .announcement-card > div:last-child > div:last-child {
-        flex-direction: column;
-    }
-}
-
-/* Animation des cartes */
-.announcement-card {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-}
-
-/* Style des boutons de filtre actifs */
-.filter-btn.active {
-    transform: translateY(-2px) !important;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2) !important;
-}
-
-/* Support du mode sombre */
-@media (prefers-color-scheme: dark) {
-    .announcements-section {
-        background: #1a202c !important;
-        color: white;
-    }
-
-    .announcement-card,
-    .newsletter-section {
-        background: #2d3748 !important;
-        border-color: #4a5568 !important;
-    }
-
-    .announcement-card h3,
-    .announcement-card p,
-    .newsletter-section h3,
-    .newsletter-section p {
-        color: #e2e8f0 !important;
-    }
-
-    input[type="email"] {
-        background: #4a5568 !important;
-        border-color: #718096 !important;
-        color: white !important;
-    }
-
-    input[type="email"]::placeholder {
-        color: #a0aec0 !important;
-    }
-}
-
-/* Animation de pulse pour les offres urgentes */
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
-
-.announcement-card[data-category="urgence"] {
-    animation: pulse 2s infinite;
-}
-
-/* Indicateur de places limitées */
-.announcement-card[data-category="opportunite"] .action-btn:hover::after {
-    content: " - Places limitées !";
-    font-weight: normal;
-}
     </style>
 </head>
 <body>
@@ -2726,29 +2680,24 @@
     <section id="accueil" class="hero">
         <div class="hero-container">
             <div class="hero-content loading">
-
                 <div class="hero-badge">
-                    <i class="fas fa-scale-balanced"></i> Cabinet d'Excellence Juridique
+                    ⚖️ Cabinet d'Excellence Juridique
                 </div>
-
                 <h1 class="hero-title">
                     Votre Partenaire <span class="highlight">Juridique</span> de Confiance au Bénin
                 </h1>
-
                 <p class="hero-subtitle">
-                    Nous accompagnons entreprises et particuliers avec des solutions juridiques efficaces,
-                    une expertise solide et un service hautement professionnel depuis 2020.
+                    Nous accompagnons les entreprises et particuliers avec des solutions juridiques innovantes,
+                    une expertise reconnue et un service d'excellence depuis plus de 15 ans.
                 </p>
-
                 <div class="hero-cta">
                     <a href="{{ route('consultation') }}" class="btn btn-primary">
-                        <i class="fas fa-phone"></i> Consultation Gratuite
+                        📞 Consultation Gratuite
                     </a>
-                    <a href="{{ route('services') }}" class="btn btn-secondary">
-                        <i class="fas fa-search"></i> Découvrir nos Services
+                    <a href="#services" class="btn btn-secondary">
+                        🔍 Découvrir nos Services
                     </a>
                 </div>
-
             </div>
             <div class="hero-visual loading">
                 <div class="hero-carousel">
@@ -2758,7 +2707,7 @@
                             <div class="carousel-slide active">
                                 <div class="carousel-image">
                                     <img
-                                        src="{{ asset('front/assets/images/image1.jpg') }}"
+                                        src="assets/images/image1.jpg"
                                         alt="Équipe d'avocats en droit des affaires travaillant sur un dossier au Bénin"
                                         loading="lazy"
                                         width="600"
@@ -2775,7 +2724,7 @@
                             <div class="carousel-slide">
                                 <div class="carousel-image">
                                     <img
-                                        src="{{ asset('front/assets/images/image2.jpg') }}"
+                                        src="assets/images/image2.jpg"
                                         alt="Consultation fiscale avec un expert-comptable et un juriste à Cotonou"
                                         loading="lazy"
                                         width="600"
@@ -2792,7 +2741,7 @@
                             <div class="carousel-slide">
                                 <div class="carousel-image">
                                     <img
-                                        src="{{ asset('front/assets/images/image3.jpg') }}"
+                                        src="assets/images/image3.jpg"
                                         alt="Juriste en droit immobilier lors de la signature d'un acte notarié au Bénin"
                                         loading="lazy"
                                         width="600"
@@ -2809,7 +2758,7 @@
                             <div class="carousel-slide">
                                 <div class="carousel-image">
                                     <img
-                                        src="{{ asset('front/assets/images/image4.jpg') }}"
+                                        src="assets/images/image4.jpg"
                                         alt="Avocat offrant un accompagnement juridique personnalisé à un client"
                                         loading="lazy"
                                         width="600"
@@ -2826,7 +2775,7 @@
                             <div class="carousel-slide">
                                 <div class="carousel-image">
                                     <img
-                                        src="{{ asset('front/assets/images/image5.jpg') }}"
+                                        src="assets/images/image5.jpg"
                                         alt="Cabinet d'avocats Axe Legal à Cotonou - Environnement professionnel d'excellence"
                                         loading="lazy"
                                         width="600"
@@ -2858,40 +2807,36 @@
         </div>
     </section>
 
-        <!-- Trust Indicators -->
-        <section class="trust-section">
-            <div class="trust-container">
-                <h2 class="trust-title">Reconnu et Certifié</h2>
-            <div class="trust-grid">
-
-        <div class="trust-item fade-in">
-            <div class="trust-icon"><i class="fas fa-balance-scale"></i></div>
-            <div class="trust-label">OHADA</div>
-            <div class="trust-desc">Expert en droit OHADA</div>
-        </div>
-
-        <div class="trust-item fade-in">
-            <div class="trust-icon"><i class="fas fa-trophy"></i></div>
-            <div class="trust-label">Excellence</div>
-            <div class="trust-desc">Prix du meilleur cabinet 2023</div>
-        </div>
-
-        <div class="trust-item fade-in">
-            <div class="trust-icon"><i class="fas fa-user-shield"></i></div>
-            <div class="trust-label">Confidentialité</div>
-            <div class="trust-desc">Garantie absolue</div>
-        </div>
-
-    </div>
-
+    <!-- Trust Indicators -->
+<section class="trust-section">
+    <div class="trust-container">
+        <h2 class="trust-title">Reconnu et Certifié</h2>
+        <div class="trust-grid">
+            <div class="trust-item fade-in">
+                <div class="trust-icon"><i class="fas fa-globe"></i></div>
+                <div class="trust-label">OHADA</div>
+                <div class="trust-desc">Expert en droit OHADA</div>
             </div>
-        </section>
+            <div class="trust-item fade-in">
+                <div class="trust-icon"><i class="fas fa-trophy"></i></div>
+                <div class="trust-label">Excellence</div>
+                <div class="trust-desc">Prix du meilleur cabinet 2023</div>
+            </div>
+            <div class="trust-item fade-in">
+                <div class="trust-icon"><i class="fas fa-lock"></i></div>
+                <div class="trust-label">Confidentialité</div>
+                <div class="trust-desc">Garantie absolue</div>
+            </div>
+        </div>
+    </div>
+</section>
+
 
     <!-- Services Section -->
     <section id="services" class="services">
         <div class="services-container">
             <div class="section-header fade-in">
-                <div class="section-badge"><i class="fas fa-scale-balanced"></i> Nos Expertises</div>
+                <div class="section-badge">⚖️ Nos Expertises</div>
                 <h2 class="section-title">Services Juridiques Complets</h2>
                 <p class="section-subtitle">
                     Une gamme complète de services juridiques adaptés aux besoins des entreprises
@@ -2900,37 +2845,49 @@
             </div>
 
             <div class="services-grid">
-                @forelse($services ?? [] as $service)
-                    <div class="service-card fade-in">
-                        <div class="service-icon">
-                            <img src="{{ asset($service->image ?? 'front/assets/images/default-service.jpg') }}" alt="{{ $service->title }}" loading="lazy">
-                        </div>
-                        <h3 class="service-title">{{ $service->title }}</h3>
-                        <p class="service-description">{{ $service->excerpt ?? (\Illuminate\Support\Str::limit($service->content, 150)) }}</p>
-                        <ul class="service-features">
-                            @if(!empty($service->features) && is_array($service->features))
-                                @foreach(array_slice($service->features, 0, 5) as $feature)
-                                    <li>{{ $feature }}</li>
-                                @endforeach
-                            @else
-                                <li>Conseil personnalisé</li>
-                                <li>Rédaction de contrats</li>
-                                <li>Assistance contentieuse</li>
-                            @endif
-                        </ul>
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <img src="assets/images/image1.jpg" alt="Droit des Affaires" loading="lazy">
                     </div>
-                @empty
-                    <div class="service-card fade-in">
-                        <div class="service-icon">
-                            <img src="{{ asset('front/assets/images/default-service.jpg') }}" alt="Service" loading="lazy">
-                        </div>
-                        <h3 class="service-title">Services à venir</h3>
-                        <p class="service-description">Nous préparons actuellement la liste de nos services.</p>
-                        <ul class="service-features">
-                            <li>Contactez-nous pour plus d'information</li>
-                        </ul>
+                    <h3 class="service-title">Droit des Affaires</h3>
+                    <p class="service-description">
+                        Accompagnement complet des entreprises dans leur création, développement et transformation.
+                    </p>
+                    <ul class="service-features">
+                        <li>Création et structuration de sociétés</li>
+                        <li>Gouvernance d'entreprise</li>
+                        <li>Fusions et acquisitions</li>
+                        <li>Contrats commerciaux</li>
+                        <li>Propriété intellectuelle</li>
+                    </ul>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <img src="assets/images/image2.jpg" alt="Fiscalité" loading="lazy">
                     </div>
-                @endforelse
+                    <h3 class="service-title">Fiscalité</h3>
+                    <p class="service-description">
+                        Optimisation fiscale et défense de vos intérêts face à l'administration fiscale.
+                    </p>
+                    <ul class="service-features">
+                        <li>Conseil en optimisation fiscale</li>
+                        <li>Défense en cas de redressement</li>
+                        <li>Déclarations fiscales</li>
+                        <li>Contentieux fiscal</li>
+                        <li>Audit fiscal</li>
+                    </ul>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <img src="assets/images/image3.jpg" alt="Droit Immobilier" loading="lazy">
+                    </div>
+                    <h3 class="service-title">Droit Immobilier</h3>
+                    <p class="service-description">
+                        Sécurisation de vos transactions immobilières et résolution des litiges fonciers.
+                    </p>
+                    <ul class="service-features">
                         <li>Vérification des titres fonciers</li>
                         <li>Rédaction d'actes de vente</li>
                         <li>Baux commerciaux et d'habitation</li>
@@ -2941,7 +2898,7 @@
 
                 <div class="service-card fade-in">
                     <div class="service-icon">
-                        <img src="{{ asset('front/assets/images/image4.jpg') }}" alt="Droit du Travail" loading="lazy">
+                        <img src="assets/images/image4.jpg" alt="Droit du Travail" loading="lazy">
                     </div>
                     <h3 class="service-title">Droit du Travail</h3>
                     <p class="service-description">
@@ -2958,7 +2915,7 @@
 
                 <div class="service-card fade-in">
                     <div class="service-icon">
-                        <img src="{{ asset('front/assets/images/image5.jpg') }}" alt="Recouvrement" loading="lazy">
+                        <img src="assets/images/image5.jpg" alt="Recouvrement" loading="lazy">
                     </div>
                     <h3 class="service-title">Recouvrement</h3>
                     <p class="service-description">
@@ -2975,7 +2932,7 @@
 
                 <div class="service-card fade-in">
                     <div class="service-icon">
-                        <img src="{{ asset('front/assets/images/image6.jpg') }}" alt="Marchés Publics" loading="lazy">
+                        <img src="assets/images/image6.jpg" alt="Marchés Publics" loading="lazy">
                     </div>
                     <h3 class="service-title">Marchés Publics</h3>
                     <p class="service-description">
@@ -2997,7 +2954,7 @@
     <section class="about">
         <div class="about-container">
             <div class="about-content slide-in-left">
-                <div class="section-badge"><i class="fas fa-book"></i> Notre Histoire</div>
+                <div class="section-badge">📖 Notre Histoire</div>
                 <h2>Excellence et Innovation Juridique</h2>
                 <p>
                     Fondé en 2008, Axe Legal s'est imposé comme l'un des cabinets d'avocats les plus respectés
@@ -3009,45 +2966,44 @@
                     garantissant à nos clients un accompagnement de qualité à chaque étape de leur parcours juridique.
                 </p>
 
-<div class="about-features">
-    <div class="about-feature">
-        <div class="about-feature-icon"><i class="fas fa-bullseye"></i></div>
-        <div class="about-feature-content">
-            <h4>Approche Stratégique</h4>
-            <p>Solutions personnalisées et conseil stratégique adapté à vos enjeux</p>
-        </div>
-    </div>
-    <div class="about-feature">
-        <div class="about-feature-icon"><i class="fas fa-bolt"></i></div>
-        <div class="about-feature-content">
-            <h4>Réactivité</h4>
-            <p>Réponse rapide et traitement efficace de vos dossiers urgents</p>
-        </div>
-    </div>
-    <div class="about-feature">
-        <div class="about-feature-icon"><i class="fas fa-handshake"></i></div>
-        <div class="about-feature-content">
-            <h4>Accompagnement</h4>
-            <p>Suivi personnalisé et relation de confiance sur le long terme</p>
-        </div>
-    </div>
-    <div class="about-feature">
-        <div class="about-feature-icon"><i class="fas fa-trophy"></i></div>
-        <div class="about-feature-content">
-            <h4>Excellence</h4>
-            <p>Standards de qualité élevés et expertise reconnue du marché</p>
-        </div>
-    </div>
-</div>
-
+                <div class="about-features">
+                    <div class="about-feature">
+                        <div class="about-feature-icon">🎯</div>
+                        <div class="about-feature-content">
+                            <h4>Approche Stratégique</h4>
+                            <p>Solutions personnalisées et conseil stratégique adapté à vos enjeux</p>
+                        </div>
+                    </div>
+                    <div class="about-feature">
+                        <div class="about-feature-icon">⚡</div>
+                        <div class="about-feature-content">
+                            <h4>Réactivité</h4>
+                            <p>Réponse rapide et traitement efficace de vos dossiers urgents</p>
+                        </div>
+                    </div>
+                    <div class="about-feature">
+                        <div class="about-feature-icon">🤝</div>
+                        <div class="about-feature-content">
+                            <h4>Accompagnement</h4>
+                            <p>Suivi personnalisé et relation de confiance sur le long terme</p>
+                        </div>
+                    </div>
+                    <div class="about-feature">
+                        <div class="about-feature-icon">🏆</div>
+                        <div class="about-feature-content">
+                            <h4>Excellence</h4>
+                            <p>Standards de qualité élevés et expertise reconnue du marché</p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="about-visual slide-in-right">
                 <div class="about-image">
-                    <img src="{{ asset('front/assets/images/about-photo.jpeg') }}" alt="Cabinet Axe Legal - Équipe professionnelle" loading="lazy">
+                    <img src="assets/images/about-photo.jpeg" alt="Cabinet Axe Legal - Équipe professionnelle" loading="lazy">
                     <div class="image-overlay">
                         <h3>Excellence Juridique</h3>
-                        <p>5 ans d'expérience au service de nos clients</p>
+                        <p>15 ans d'expérience au service de nos clients</p>
                     </div>
                 </div>
             </div>
@@ -3059,11 +3015,11 @@
         <div class="stats-container">
             <div class="stats-grid">
                 <div class="stat-item fade-in">
-                    <span class="stat-number" data-target="300">0</span>
+                    <span class="stat-number" data-target="500">0</span>
                     <span class="stat-label">Clients Accompagnés</span>
                 </div>
                 <div class="stat-item fade-in">
-                    <span class="stat-number" data-target="200">0</span>
+                    <span class="stat-number" data-target="1200">0</span>
                     <span class="stat-label">Dossiers Traités</span>
                 </div>
                 <div class="stat-item fade-in">
@@ -3071,600 +3027,220 @@
                     <span class="stat-label">% de Réussite</span>
                 </div>
                 <div class="stat-item fade-in">
-                    <span class="stat-number" data-target="5">0</span>
+                    <span class="stat-number" data-target="15">0</span>
                     <span class="stat-label">Années d'Expérience</span>
                 </div>
             </div>
         </div>
     </section>
 
-
-    <!-- Section Annonces & Opportunités -->
-<section id="annonces" class="announcements-section" style="
-    padding: 5rem 1rem;
-    background: linear-gradient(135deg, #f0f4f8 0%, #dfe7f1 100%);
-    min-height: 100vh;
-">
-    <div class="container" style="max-width: 1400px; margin: 0 auto;">
-
-        <!-- En-tête -->
-        <div class="announcements-header" style="text-align: center; margin-bottom: 4rem;">
-            <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: var(--primary-blue); color: white; padding: 0.75rem 1.5rem; border-radius: 50px; margin-bottom: 1.5rem; font-size: 0.9rem; font-weight: 600;">
-                <span><i class="fas fa-bullhorn"></i></span> Annonces & Opportunités
-            </div>
-
-            <h2 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: var(--primary-blue); margin-bottom: 1rem; font-family: 'Playfair Display', serif;">
-                Dernières Opportunités
-            </h2>
-
-            <p style="font-size: 1.1rem; color: var(--text-dark); max-width: 700px; margin: 0 auto 2rem; line-height: 1.6;">
-                Découvrez nos dernières offres spéciales, promotions et opportunités exclusives.
-                <strong>Ne manquez pas ces chances uniques !</strong>
-            </p>
-
-            <!-- Filtres -->
-            <div class="announcement-filters" style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem;">
-                <button class="filter-btn active" data-filter="all" style="
-                    background: var(--primary-blue);
-                    color: white;
-                    border: none;
-                    padding: 0.75rem 1.5rem;
-                    border-radius: 25px;
-                    font-weight: 600;
-                    cursor: pointer;
-                    transition: all 0.3s ease;
-                ">Toutes les annonces</button>
-                <button class="filter-btn" data-filter="promotion" style="
-                    background: #fff3cd;
-                    color: #856404;
-                    border: 2px solid #ffc107;
-                    padding: 0.75rem 1.5rem;
-                    border-radius: 25px;
-                    font-weight: 600;
-                    cursor: pointer;
-                    transition: all 0.3s ease;
-                ">Promotions</button>
-                <button class="filter-btn" data-filter="opportunite" style="
-                    background: #d1ecf1;
-                    color: #0c5460;
-                    border: 2px solid #17a2b8;
-                    padding: 0.75rem 1.5rem;
-                    border-radius: 25px;
-                    font-weight: 600;
-                    cursor: pointer;
-                    transition: all 0.3s ease;
-                ">Opportunités</button>
-                <button class="filter-btn" data-filter="urgence" style="
-                    background: #f8d7da;
-                    color: #721c24;
-                    border: 2px solid #dc3545;
-                    padding: 0.75rem 1.5rem;
-                    border-radius: 25px;
-                    font-weight: 600;
-                    cursor: pointer;
-                    transition: all 0.3s ease;
-                ">Offres Urgentes</button>
-            </div>
-        </div>
-
-        <!-- Grille des annonces -->
-        <div class="announcements-grid" style="
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: 2rem;
-            margin-bottom: 4rem;
-        ">
-
-            <!-- Annonce 1 - Promotion Spéciale -->
-            <div class="announcement-card" data-category="promotion" style="
-                background: white;
-                border-radius: 20px;
-                overflow: hidden;
-                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-                transition: all 0.3s ease;
-                border: 1px solid #e9ecef;
-                position: relative;
-            ">
-                <!-- Badge promotion -->
-                <div style="position: absolute; top: 1rem; left: 1rem; background: linear-gradient(135deg, #ff6b6b, #ff8e8e); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; z-index: 2;">
-                    <i class="fas fa-tag"></i> PROMOTION
-                </div>
-
-                <!-- Compteur de temps limité -->
-                <div style="position: absolute; top: 1rem; right: 1rem; background: rgba(0,0,0,0.8); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; z-index: 2;">
-                    <i class="fas fa-clock"></i> <span id="countdown-1">48:00:00</span>
-                </div>
-
-                <!-- Image de l'annonce -->
-                <div style="height: 200px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); position: relative; overflow: hidden;">
-                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: white;">
-                        <i class="fas fa-gift" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.9;"></i>
-                        <h4 style="margin: 0; font-size: 1.2rem; font-weight: 600;">OFFRE SPÉCIALE</h4>
-                    </div>
-                </div>
-
-                <!-- Contenu de l'annonce -->
-                <div style="padding: 2rem;">
-                    <h3 style="color: var(--primary-blue); margin-bottom: 1rem; font-size: 1.4rem; font-weight: 700;">
-                        Consultation Juridique à -50%
-                    </h3>
-
-                    <p style="color: var(--text-dark); margin-bottom: 1.5rem; line-height: 1.6;">
-                        Profitez de notre offre exceptionnelle : consultation juridique complète à moitié prix pour toute nouvelle demande cette semaine.
-                    </p>
-
-                    <!-- Détails de l'offre -->
-                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                            <span style="font-weight: 600; color: var(--text-dark);">Prix normal :</span>
-                            <span style="text-decoration: line-through; color: #6c757d;">20 000 Fcfa</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <span style="font-weight: 600; color: #28a745;">Prix promotionnel :</span>
-                            <span style="font-size: 1.3rem; font-weight: 700; color: #28a745;">15 000 Fcfa</span>
-                        </div>
-                    </div>
-
-                    <!-- Conditions -->
-                    <div style="margin-bottom: 1.5rem;">
-                        <h4 style="color: var(--primary-blue); margin-bottom: 0.5rem; font-size: 1rem;">Conditions :</h4>
-                        <ul style="color: var(--text-dark); font-size: 0.9rem; padding-left: 1.2rem; margin: 0;">
-                            <li>Offre valable jusqu'au 30 décembre 2024</li>
-                            <li>Réservation en ligne uniquement</li>
-                            <li>Première consultation uniquement</li>
-                        </ul>
-                    </div>
-
-                    <!-- CTA -->
-                    <div style="display: flex; gap: 1rem;">
-                        <button class="action-btn" style="
-                            flex: 2;
-                            background: var(--primary-blue);
-                            color: white;
-                            border: none;
-                            padding: 1rem;
-                            border-radius: 10px;
-                            font-weight: 600;
-                            cursor: pointer;
-                            transition: all 0.3s ease;
-                        " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 15px rgba(30, 90, 168, 0.3)'"
-                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-                            <i class="fas fa-bolt"></i> Profiter de l'offre
-                        </button>
-                        <button class="info-btn" style="
-                            flex: 1;
-                            background: transparent;
-                            color: var(--primary-blue);
-                            border: 2px solid var(--primary-blue);
-                            padding: 1rem;
-                            border-radius: 10px;
-                            font-weight: 600;
-                            cursor: pointer;
-                            transition: all 0.3s ease;
-                        ">
-                            <i class="fas fa-info-circle"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Annonce 2 - Opportunité de Partenariat -->
-            <div class="announcement-card" data-category="opportunite" style="
-                background: white;
-                border-radius: 20px;
-                overflow: hidden;
-                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-                transition: all 0.3s ease;
-                border: 1px solid #e9ecef;
-                position: relative;
-            ">
-                <!-- Badge opportunité -->
-                <div style="position: absolute; top: 1rem; left: 1rem; background: linear-gradient(135deg, #17a2b8, #20c997); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; z-index: 2;">
-                    <i class="fas fa-handshake"></i> PARTENARIAT
-                </div>
-
-                <!-- Image de l'annonce -->
-                <div style="height: 200px; background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); position: relative; overflow: hidden;">
-                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: white;">
-                        <i class="fas fa-users" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.9;"></i>
-                        <h4 style="margin: 0; font-size: 1.2rem; font-weight: 600;">PARTENARIAT</h4>
-                    </div>
-                </div>
-
-                <!-- Contenu de l'annonce -->
-                <div style="padding: 2rem;">
-                    <h3 style="color: #17a2b8; margin-bottom: 1rem; font-size: 1.4rem; font-weight: 700;">
-                        Programme Avocats Associés
-                    </h3>
-
-                    <p style="color: var(--text-dark); margin-bottom: 1.5rem; line-height: 1.6;">
-                        Rejoignez notre réseau d'avocats associés et bénéficiez de notre infrastructure, de notre clientèle et de nos ressources.
-                    </p>
-
-                    <!-- Avantages -->
-                    <div style="margin-bottom: 1.5rem;">
-                        <h4 style="color: #17a2b8; margin-bottom: 0.5rem; font-size: 1rem;">Avantages :</h4>
-                        <ul style="color: var(--text-dark); font-size: 0.9rem; padding-left: 1.2rem; margin: 0;">
-                            <li>Infrastructure moderne mise à disposition</li>
-                            <li>Portefeuille clients existant</li>
-                            <li>Formation continue gratuite</li>
-                            <li>Support administratif complet</li>
-                        </ul>
-                    </div>
-
-                    <!-- Critères -->
-                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem;">
-                        <h4 style="color: #17a2b8; margin-bottom: 0.5rem; font-size: 1rem;">Critères :</h4>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; font-size: 0.9rem;">
-                            <div style="display: flex; align-items: center; gap: 0.5rem;">
-                                <i class="fas fa-check-circle" style="color: #28a745;"></i>
-                                <span>5+ ans d'expérience</span>
-                            </div>
-                            <div style="display: flex; align-items: center; gap: 0.5rem;">
-                                <i class="fas fa-check-circle" style="color: #28a745;"></i>
-                                <span>Spécialisation requise</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- CTA -->
-                    <button class="action-btn" style="
-                        width: 100%;
-                        background: #17a2b8;
-                        color: white;
-                        border: none;
-                        padding: 1rem;
-                        border-radius: 10px;
-                        font-weight: 600;
-                        cursor: pointer;
-                        transition: all 0.3s ease;
-                    " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 15px rgba(23, 162, 184, 0.3)'"
-                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-                        <i class="fas fa-user-plus"></i> Postuler maintenant
-                    </button>
-                </div>
-            </div>
-
-            <!-- Annonce 3 - Offre Urgente -->
-            <div class="announcement-card" data-category="urgence" style="
-                background: white;
-                border-radius: 20px;
-                overflow: hidden;
-                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-                transition: all 0.3s ease;
-                border: 1px solid #e9ecef;
-                position: relative;
-            ">
-                <!-- Badge urgence -->
-                <div style="position: absolute; top: 1rem; left: 1rem; background: linear-gradient(135deg, #dc3545, #e83e8c); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; z-index: 2;">
-                    <i class="fas fa-exclamation-triangle"></i> URGENT
-                </div>
-
-                <!-- Image de l'annonce -->
-                <div style="height: 200px; background: linear-gradient(135deg, #dc3545 0%, #fd7e14 100%); position: relative; overflow: hidden;">
-                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: white;">
-                        <i class="fas fa-clock" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.9;"></i>
-                        <h4 style="margin: 0; font-size: 1.2rem; font-weight: 600;">OFFRE URGENTE</h4>
-                    </div>
-                </div>
-
-                <!-- Contenu de l'annonce -->
-                <div style="padding: 2rem;">
-                    <h3 style="color: #dc3545; margin-bottom: 1rem; font-size: 1.4rem; font-weight: 700;">
-                        Assistance Litige Immédiate
-                    </h3>
-
-                    <p style="color: var(--text-dark); margin-bottom: 1.5rem; line-height: 1.6;">
-                        Situation urgente ? Notre équipe est disponible 24h/24 pour les litiges nécessitant une intervention immédiate.
-                    </p>
-
-                    <!-- Services urgents -->
-                    <div style="margin-bottom: 1.5rem;">
-                        <h4 style="color: #dc3545; margin-bottom: 0.5rem; font-size: 1rem;">Services proposés :</h4>
-                        <ul style="color: var(--text-dark); font-size: 0.9rem; padding-left: 1.2rem; margin: 0;">
-                            <li>Assistance téléphonique immédiate</li>
-                            <li>Rédaction urgente de mise en demeure</li>
-                            <li>Consultation d'urgence sous 2h</li>
-                            <li>Accompagnement aux audiences</li>
-                        </ul>
-                    </div>
-
-                    <!-- Disponibilité -->
-                    <div style="background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 10px; padding: 1rem; margin-bottom: 1.5rem;">
-                        <div style="display: flex; align-items: center; gap: 0.5rem; color: #856404;">
-                            <i class="fas fa-phone-alt"></i>
-                            <strong>Disponible 24h/24 - 7j/7</strong>
-                        </div>
-                        <div style="color: #856404; font-size: 0.9rem; margin-top: 0.5rem;">
-                            Appelez le <strong>+229 01 97 74 75 93</strong> pour une assistance immédiate
-                        </div>
-                    </div>
-
-                    <!-- CTA -->
-                    <div style="display: flex; gap: 1rem;">
-                        <button class="action-btn" style="
-                            flex: 1;
-                            background: #dc3545;
-                            color: white;
-                            border: none;
-                            padding: 1rem;
-                            border-radius: 10px;
-                            font-weight: 600;
-                            cursor: pointer;
-                            transition: all 0.3s ease;
-                        " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 15px rgba(220, 53, 69, 0.3)'"
-                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-                            <i class="fas fa-phone"></i> Appeler
-                        </button>
-                        <button class="secondary-btn" style="
-                            flex: 1;
-                            background: transparent;
-                            color: #dc3545;
-                            border: 2px solid #dc3545;
-                            padding: 1rem;
-                            border-radius: 10px;
-                            font-weight: 600;
-                            cursor: pointer;
-                            transition: all 0.3s ease;
-                        ">
-                            <i class="fas fa-envelope"></i> Message
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Annonce 4 - Webinaire Gratuit -->
-            <div class="announcement-card" data-category="opportunite" style="
-                background: white;
-                border-radius: 20px;
-                overflow: hidden;
-                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-                transition: all 0.3s ease;
-                border: 1px solid #e9ecef;
-                position: relative;
-            ">
-                <!-- Badge gratuit -->
-                <div style="position: absolute; top: 1rem; left: 1rem; background: linear-gradient(135deg, #28a745, #20c997); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; z-index: 2;">
-                    <i class="fas fa-graduation-cap"></i> GRATUIT
-                </div>
-
-                <!-- Image de l'annonce -->
-                <div style="height: 200px; background: linear-gradient(135deg, #28a745 0%, #20c997 100%); position: relative; overflow: hidden;">
-                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: white;">
-                        <i class="fas fa-video" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.9;"></i>
-                        <h4 style="margin: 0; font-size: 1.2rem; font-weight: 600;">WEBINAIRE</h4>
-                    </div>
-                </div>
-
-                <!-- Contenu de l'annonce -->
-                <div style="padding: 2rem;">
-                    <h3 style="color: #28a745; margin-bottom: 1rem; font-size: 1.4rem; font-weight: 700;">
-                        Webinaire : Droit des Startups
-                    </h3>
-
-                    <p style="color: var(--text-dark); margin-bottom: 1.5rem; line-height: 1.6;">
-                        Apprenez les bases juridiques essentielles pour lancer et développer votre startup en toute sécurité.
-                    </p>
-
-                    <!-- Détails du webinaire -->
-                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem;">
-                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
-                            <i class="fas fa-calendar" style="color: #28a745;"></i>
-                            <span><strong>Date :</strong> 15 Décembre 2025</span>
-                        </div>
-                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
-                            <i class="fas fa-clock" style="color: #28a745;"></i>
-                            <span><strong>Heure :</strong> 18h00 - 19h30</span>
-                        </div>
-                        <div style="display: flex; align-items: center; gap: 0.5rem;">
-                            <i class="fas fa-users" style="color: #28a745;"></i>
-                            <span><strong>Places restantes :</strong> 24/50</span>
-                        </div>
-                    </div>
-
-                    <!-- Intervenant -->
-                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding: 1rem; background: #e8f5e8; border-radius: 10px;">
-                        <div style="width: 50px; height: 50px; background: #28a745; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">
-                            <i class="fas fa-user-tie"></i>
-                        </div>
-                        <div>
-                            <div style="font-weight: 600; color: #28a745;">Maître Dubois</div>
-                            <div style="font-size: 0.9rem; color: var(--text-dark);">Expert en droit des affaires</div>
-                        </div>
-                    </div>
-
-                    <!-- CTA -->
-                    <button class="action-btn" style="
-                        width: 100%;
-                        background: #28a745;
-                        color: white;
-                        border: none;
-                        padding: 1rem;
-                        border-radius: 10px;
-                        font-weight: 600;
-                        cursor: pointer;
-                        transition: all 0.3s ease;
-                    " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 15px rgba(40, 167, 69, 0.3)'"
-                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-                        <i class="fas fa-user-plus"></i> S'inscrire gratuitement
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Newsletter -->
-        <div class="newsletter-section" style="
-            background: white;
-            border-radius: 20px;
-            padding: 3rem;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-            text-align: center;
-        ">
-            <h3 style="color: var(--primary-blue); margin-bottom: 1rem; font-size: 1.8rem;">
-                Ne manquez aucune opportunité
-            </h3>
-            <p style="color: var(--text-dark); margin-bottom: 2rem; font-size: 1.1rem;">
-                Inscrivez-vous à notre newsletter pour recevoir en premier nos dernières offres et annonces.
-            </p>
-
-            <div style="display: flex; gap: 1rem; max-width: 500px; margin: 0 auto;">
-                <input type="email" placeholder="Votre email" style="
-                    flex: 1;
-                    padding: 1rem;
-                    border: 2px solid #e9ecef;
-                    border-radius: 10px;
-                    font-size: 1rem;
-                    transition: all 0.3s ease;
-                " onfocus="this.style.borderColor='var(--primary-blue)'; this.style.boxShadow='0 0 0 3px rgba(30, 90, 168, 0.1)'"
-                onblur="this.style.borderColor='#e9ecef'; this.style.boxShadow='none'">
-                <button style="
-                    background: var(--primary-blue);
-                    color: white;
-                    border: none;
-                    padding: 1rem 2rem;
-                    border-radius: 10px;
-                    font-weight: 600;
-                    cursor: pointer;
-                    transition: all 0.3s ease;
-                " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 15px rgba(30, 90, 168, 0.3)'"
-                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-                    S'abonner
-                </button>
-            </div>
-
-            <p style="color: #6c757d; font-size: 0.9rem; margin-top: 1rem;">
-                <i class="fas fa-shield-alt"></i> Nous respectons votre vie privée. Désabonnez-vous à tout moment.
-            </p>
-        </div>
-    </div>
-</section>
-
-
-
-
     <!-- Team Section -->
-<section id="equipe" class="team">
-    <div class="team-container">
-        <div class="section-header fade-in">
-            <div class="section-badge"><i class="fas fa-users"></i> Notre Équipe</div>
-            <h2 class="section-title">Experts Juridiques de Renom</h2>
-            <p class="section-subtitle">
-                Une équipe pluridisciplinaire d'avocats expérimentés, reconnus pour leur expertise
-                et leur engagement envers l'excellence juridique.
-            </p>
+    <section id="equipe" class="team">
+        <div class="team-container">
+            <div class="section-header fade-in">
+                <div class="section-badge">👥 Notre Équipe</div>
+                <h2 class="section-title">Experts Juridiques de Renom</h2>
+                <p class="section-subtitle">
+                    Une équipe pluridisciplinaire d'avocats expérimentés, reconnus pour leur expertise
+                    et leur engagement envers l'excellence juridique.
+                </p>
+            </div>
+
+            <div class="team-grid">
+                <div class="team-card fade-in">
+                    <div class="team-image">
+                        <div class="team-creation">
+                            <div class="team-creation-icon">👨‍💼</div>
+                            <div class="team-creation-text">
+                                <h4>l'Associé-Gérant</h4>
+                                <p>Direction & Stratégie</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-info">
+                        <h3 class="team-name">l'Associé-Gérant</h3>
+                        <p class="team-role">Direction & Stratégie</p>
+                        <p class="team-description">
+                            Pilote la stratégie globale du cabinet et assure la direction des opérations
+                            avec une vision d'excellence et d'innovation juridique.
+                        </p>
+                        <div class="team-contact">
+                            <a href="mailto:contact@axe-legal.bj">✉️</a>
+                            <a href="tel:+2290197747593">📞</a>
+                            <a href="https://wa.me/2290197747593" target="_blank">💬</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-card fade-in">
+                    <div class="team-image">
+                        <div class="team-creation">
+                            <div class="team-creation-icon">💰</div>
+                            <div class="team-creation-text">
+                                <h4>Cellule de l'Intelligence Fiscale</h4>
+                                <p>Optimisation & Défense Fiscale</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-info">
+                        <h3 class="team-name">Cellule de l'Intelligence Fiscale</h3>
+                        <p class="team-role">Optimisation & Défense Fiscale</p>
+                        <p class="team-description">
+                            Expertise pointue en fiscalité, optimisation fiscale et défense des intérêts
+                            face aux administrations fiscales.
+                        </p>
+                        <div class="team-contact">
+                            <a href="mailto:contact@axe-legal.bj">✉️</a>
+                            <a href="tel:+2290197747593">📞</a>
+                            <a href="https://wa.me/2290197747593" target="_blank">💬</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-card fade-in">
+                    <div class="team-image">
+                        <div class="team-creation">
+                            <div class="team-creation-icon">⚖️</div>
+                            <div class="team-creation-text">
+                                <h4>Cellule des Actes Juridiques</h4>
+                                <p>Gouvernance d'Entreprise</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-info">
+                        <h3 class="team-name">Cellule des Actes Juridiques et de la Gouvernance d'Entreprise</h3>
+                        <p class="team-role">Gouvernance d'Entreprise</p>
+                        <p class="team-description">
+                            Spécialisée dans la rédaction d'actes juridiques, la gouvernance d'entreprise
+                            et l'accompagnement des structures organisationnelles.
+                        </p>
+                        <div class="team-contact">
+                            <a href="mailto:contact@axe-legal.bj">✉️</a>
+                            <a href="tel:+2290197747593">📞</a>
+                            <a href="https://wa.me/2290197747593" target="_blank">💬</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-card fade-in">
+                    <div class="team-image">
+                        <div class="team-creation">
+                            <div class="team-creation-icon">📊</div>
+                            <div class="team-creation-text">
+                                <h4>Cellule de Traitement de l'Information Financière</h4>
+                                <p>Analyse & Intelligence Financière</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-info">
+                        <h3 class="team-name">Cellule de Traitement de l'Information Financière</h3>
+                        <p class="team-role">Analyse & Intelligence Financière</p>
+                        <p class="team-description">
+                            Expertise en analyse financière, traitement de données et intelligence
+                            économique pour optimiser les décisions stratégiques.
+                        </p>
+                        <div class="team-contact">
+                            <a href="mailto:contact@axe-legal.bj">✉️</a>
+                            <a href="tel:+2290197747593">📞</a>
+                            <a href="https://wa.me/2290197747593" target="_blank">💬</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="team-grid">
-            <div class="team-card fade-in">
-                <div class="team-image">
-                    <div class="team-creation">
-                        <div class="team-creation-icon"><i class="fas fa-user-tie"></i></div>
-                        <div class="team-creation-text">
-                            <h4>l'Associé-Gérant</h4>
-                            <p>Direction & Stratégie</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="team-info">
-                    <h3 class="team-name">l'Associé-Gérant</h3>
-                    <p class="team-role">Direction & Stratégie</p>
-                    <p class="team-description">
-                        Pilote la stratégie globale du cabinet et assure la direction des opérations
-                        avec une vision d'excellence et d'innovation juridique.
-                    </p>
-                    <div class="team-contact">
-                        <a href="mailto:contact@axe-legal.bj"><i class="fas fa-envelope"></i></a>
-                        <a href="tel:+2290197747593"><i class="fas fa-phone-alt"></i></a>
-                        <a href="https://wa.me/2290197747593" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                    </div>
-                </div>
+    <!-- Process Section -->
+    <!-- <section id="processus" class="process">
+        <div class="process-container">
+            <div class="section-header fade-in">
+                <div class="section-badge">📋 Notre Méthode</div>
+                <h2 class="section-title">Un Processus Éprouvé</h2>
+                <p class="section-subtitle">
+                    Une approche structurée en 5 étapes pour garantir la qualité de nos prestations
+                    et la satisfaction de nos clients.
+                </p>
             </div>
 
-            <div class="team-card fade-in">
-                <div class="team-image">
-                    <div class="team-creation">
-                        <div class="team-creation-icon"><i class="fas fa-coins"></i></div>
-                        <div class="team-creation-text">
-                            <h4>Cellule de l'Intelligence Fiscale</h4>
-                            <p>Optimisation & Défense Fiscale</p>
+            <div class="process-timeline">
+                <div class="process-item fade-in">
+                    <div class="process-number">1</div>
+                    <div class="process-content">
+                        <div class="process-image" style="display:flex;align-items:center;justify-content:center;height:80px;margin-bottom:1.5rem;background:none;">
+                            <i class="fas fa-magnifying-glass" style="font-size:2.5rem;color:var(--primary-blue);"></i>
                         </div>
+                        <h3 class="process-title">Analyse de Vos Besoins</h3>
+                        <p class="process-description">
+                            Écoute attentive de votre situation, analyse approfondie de vos besoins juridiques
+                            et identification des enjeux stratégiques.
+                        </p>
                     </div>
                 </div>
-                <div class="team-info">
-                    <h3 class="team-name">Cellule de l'Intelligence Fiscale</h3>
-                    <p class="team-role">Optimisation & Défense Fiscale</p>
-                    <p class="team-description">
-                        Expertise pointue en fiscalité, optimisation fiscale et défense des intérêts
-                        face aux administrations fiscales.
-                    </p>
-                    <div class="team-contact">
-                        <a href="mailto:contact@axe-legal.bj"><i class="fas fa-envelope"></i></a>
-                        <a href="tel:+2290197747593"><i class="fas fa-phone-alt"></i></a>
-                        <a href="https://wa.me/2290197747593" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                    </div>
-                </div>
-            </div>
 
-            <div class="team-card fade-in">
-                <div class="team-image">
-                    <div class="team-creation">
-                        <div class="team-creation-icon"><i class="fas fa-scale-balanced"></i></div>
-                        <div class="team-creation-text">
-                            <h4>Cellule des Actes Juridiques</h4>
-                            <p>Gouvernance d'Entreprise</p>
+                <div class="process-item fade-in">
+                    <div class="process-number">2</div>
+                    <div class="process-content">
+                        <div class="process-image" style="display:flex;align-items:center;justify-content:center;height:80px;margin-bottom:1.5rem;background:none;">
+                            <i class="fas fa-lightbulb" style="font-size:2.5rem;color:var(--primary-blue);"></i>
                         </div>
+                        <h3 class="process-title">Stratégie Personnalisée</h3>
+                        <p class="process-description">
+                            Élaboration d'une stratégie juridique sur mesure, adaptée à vos objectifs
+                            et contraintes spécifiques.
+                        </p>
                     </div>
                 </div>
-                <div class="team-info">
-                    <h3 class="team-name">Cellule des Actes Juridiques et de la Gouvernance d'Entreprise</h3>
-                    <p class="team-role">Gouvernance d'Entreprise</p>
-                    <p class="team-description">
-                        Spécialisée dans la rédaction d'actes juridiques, la gouvernance d'entreprise
-                        et l'accompagnement des structures organisationnelles.
-                    </p>
-                    <div class="team-contact">
-                        <a href="mailto:contact@axe-legal.bj"><i class="fas fa-envelope"></i></a>
-                        <a href="tel:+2290197747593"><i class="fas fa-phone-alt"></i></a>
-                        <a href="https://wa.me/2290197747593" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                    </div>
-                </div>
-            </div>
 
-            <div class="team-card fade-in">
-                <div class="team-image">
-                    <div class="team-creation">
-                        <div class="team-creation-icon"><i class="fas fa-chart-line"></i></div>
-                        <div class="team-creation-text">
-                            <h4>Cellule de Traitement de l'Information Financière</h4>
-                            <p>Analyse & Intelligence Financière</p>
+                <div class="process-item fade-in">
+                    <div class="process-number">3</div>
+                    <div class="process-content">
+                        <div class="process-image" style="display:flex;align-items:center;justify-content:center;height:80px;margin-bottom:1.5rem;background:none;">
+                            <i class="fas fa-briefcase" style="font-size:2.5rem;color:var(--primary-blue);"></i>
                         </div>
+                        <h3 class="process-title">Mise en Œuvre</h3>
+                        <p class="process-description">
+                            Exécution rigoureuse de la stratégie définie avec un suivi régulier
+                            et une communication transparente.
+                        </p>
                     </div>
                 </div>
-                <div class="team-info">
-                    <h3 class="team-name">Cellule de Traitement de l'Information Financière</h3>
-                    <p class="team-role">Analyse & Intelligence Financière</p>
-                    <p class="team-description">
-                        Expertise en analyse financière, traitement de données et intelligence
-                        économique pour optimiser les décisions stratégiques.
-                    </p>
-                    <div class="team-contact">
-                        <a href="mailto:contact@axe-legal.bj"><i class="fas fa-envelope"></i></a>
-                        <a href="tel:+2290197747593"><i class="fas fa-phone-alt"></i></a>
-                        <a href="https://wa.me/2290197747593" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+                <div class="process-item fade-in">
+                    <div class="process-number">4</div>
+                    <div class="process-content">
+                        <div class="process-image" style="display:flex;align-items:center;justify-content:center;height:80px;margin-bottom:1.5rem;background:none;">
+                            <i class="fas fa-chart-line" style="font-size:2.5rem;color:var(--primary-blue);"></i>
+                        </div>
+                        <h3 class="process-title">Suivi & Ajustements</h3>
+                        <p class="process-description">
+                            Monitoring continu de l'avancement, ajustements stratégiques si nécessaire
+                            et optimisation des résultats.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="process-item fade-in">
+                    <div class="process-number">5</div>
+                    <div class="process-content">
+                        <div class="process-image" style="display:flex;align-items:center;justify-content:center;height:80px;margin-bottom:1.5rem;background:none;">
+                            <i class="fas fa-handshake" style="font-size:2.5rem;color:var(--primary-blue);"></i>
+                        </div>
+                        <h3 class="process-title">Résultats & Accompagnement</h3>
+                        <p class="process-description">
+                            Livraison des résultats attendus et accompagnement post-mission
+                            pour assurer la pérennité des solutions.
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-
-
+    </section> -->
 
     <!-- Testimonials Section -->
     <section id="temoignages" class="testimonials">
         <div class="testimonials-container">
             <div class="section-header fade-in">
-                <div class="section-badge"><i class="fas fa-comments"></i> Témoignages</div>
+                <div class="section-badge">💬 Témoignages</div>
                 <h2 class="section-title">Ce Que Disent Nos Clients</h2>
                 <p class="section-subtitle">
                     La satisfaction de nos clients est notre plus belle récompense.
@@ -3760,7 +3336,113 @@
         </div>
     </section>
 
+    <!-- Contact Section -->
+    <!-- <section id="contact" class="contact">
+        <div class="contact-container">
+            <div class="contact-info fade-in">
+                <h3>Contactez-nous</h3>
+                <p>
+                    Prêt à discuter de vos besoins juridiques ? Notre équipe est à votre disposition
+                    pour vous fournir des conseils experts et des solutions adaptées.
+                </p>
 
+                <div class="contact-items">
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div class="contact-details">
+                            <h4>Adresse</h4>
+                            <p>Godomey échangeur, en direction Calavi-Cotonou, côté opposé à la mosquée.<br>Bénin</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div class="contact-details">
+                            <h4>Téléphone</h4>
+                            <p>+229 01 97 74 75 93<br>+229 01 65 65 68 25<br>+229 01 40 66 69 38</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">✉️</div>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <p>contact@axe-legal.bj</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">🕒</div>
+                        <div class="contact-details">
+                            <h4>Horaires</h4>
+                            <p>Lun - Ven: 8h00 - 18h00<br>Sam: 9h00 - 13h00<br>Urgences: 24h/7j</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form fade-in" id="consultation">
+                <div class="section-header">
+                    <h3>Questions Fréquentes</h3>
+                    <p class="section-subtitle">
+                        Cliquez sur une question pour nous contacter directement sur WhatsApp et obtenir une réponse rapide de nos experts.
+                    </p>
+                </div>
+
+                <div class="whatsapp-questions">
+                    <a href="https://wa.me/2290197747593?text=Bonjour, j'ai une question concernant l'optimisation fiscale de mon entreprise. Pouvez-vous m'aider ?" target="_blank" class="whatsapp-question">
+                        <div class="question-icon">💰</div>
+                        <div class="question-content">
+                            <h4>Optimisation Fiscale</h4>
+                            <p>Comment optimiser la fiscalité de mon entreprise tout en respectant la légalité ?</p>
+                        </div>
+                    </a>
+
+                    <a href="https://wa.me/2290197747593?text=Bonjour, j'ai besoin d'aide pour la création et structuration de ma société. Quelles sont les étapes ?" target="_blank" class="whatsapp-question">
+                        <div class="question-icon">🏢</div>
+                        <div class="question-content">
+                            <h4>Création de Société</h4>
+                            <p>Quelles sont les étapes pour créer et structurer ma société au Bénin ?</p>
+                        </div>
+                    </a>
+
+                    <a href="https://wa.me/2290197747593?text=Bonjour, je suis confronté à un redressement fiscal. Pouvez-vous m'assister ?" target="_blank" class="whatsapp-question">
+                        <div class="question-icon">⚖️</div>
+                        <div class="question-content">
+                            <h4>Redressement Fiscal</h4>
+                            <p>Comment défendre mes intérêts face à un redressement fiscal ?</p>
+                        </div>
+                    </a>
+
+                    <a href="https://wa.me/2290197747593?text=Bonjour, j'ai des créances impayées. Comment procéder au recouvrement ?" target="_blank" class="whatsapp-question">
+                        <div class="question-icon">💳</div>
+                        <div class="question-content">
+                            <h4>Recouvrement de Créances</h4>
+                            <p>Mes clients ne paient pas, comment récupérer mes créances efficacement ?</p>
+                        </div>
+                    </a>
+
+                    <a href="https://wa.me/2290197747593?text=Bonjour, j'ai un litige immobilier. Pouvez-vous m'aider à le résoudre ?" target="_blank" class="whatsapp-question">
+                        <div class="question-icon">🏠</div>
+                        <div class="question-content">
+                            <h4>Litige Immobilier</h4>
+                            <p>Comment résoudre un conflit immobilier et sécuriser mes transactions ?</p>
+                        </div>
+                    </a>
+
+                    <a href="https://wa.me/2290197747593?text=Bonjour, je souhaite participer à un marché public. Pouvez-vous m'accompagner ?" target="_blank" class="whatsapp-question">
+                        <div class="question-icon">📋</div>
+                        <div class="question-content">
+                            <h4>Marchés Publics</h4>
+                            <p>Comment préparer et soumettre une offre pour un marché public ?</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Footer -->
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-container">
@@ -3850,124 +3532,6 @@
         </div>
     </footer>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <script>
-// Filtrage des annonces
-document.addEventListener('DOMContentLoaded', function() {
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const announcementCards = document.querySelectorAll('.announcement-card');
-
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            // Retirer la classe active de tous les boutons
-            filterBtns.forEach(b => {
-                b.style.background = b.getAttribute('data-filter') === 'all' ? '#e3f2fd' : 'white';
-                b.style.color = b.getAttribute('data-filter') === 'all' ? 'var(--primary-blue)' : 'var(--text-dark)';
-                b.classList.remove('active');
-            });
-
-            // Ajouter la classe active au bouton cliqué
-            this.classList.add('active');
-            this.style.background = this.getAttribute('data-filter') === 'all' ? 'var(--primary-blue)' :
-                                  this.getAttribute('data-filter') === 'promotion' ? '#ffc107' :
-                                  this.getAttribute('data-filter') === 'opportunite' ? '#17a2b8' : '#dc3545';
-            this.style.color = 'white';
-
-            const filter = this.getAttribute('data-filter');
-
-            announcementCards.forEach(card => {
-                if (filter === 'all' || card.getAttribute('data-category') === filter) {
-                    card.style.display = 'block';
-                    setTimeout(() => {
-                        card.style.opacity = '1';
-                        card.style.transform = 'translateY(0)';
-                    }, 100);
-                } else {
-                    card.style.opacity = '0';
-                    card.style.transform = 'translateY(20px)';
-                    setTimeout(() => {
-                        card.style.display = 'none';
-                    }, 300);
-                }
-            });
-        });
-    });
-
-    // Animation au survol des cartes
-    announcementCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-10px)';
-            this.style.boxShadow = '0 20px 50px rgba(0, 0, 0, 0.15)';
-        });
-
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
-            this.style.boxShadow = '0 10px 40px rgba(0, 0, 0, 0.1)';
-        });
-    });
-
-    // Compteur de temps pour les offres limitées
-    function updateCountdown() {
-        const countdownElement = document.getElementById('countdown-1');
-        if (countdownElement) {
-            // Simulation d'un compte à rebours de 48 heures
-            let time = countdownElement.textContent.split(':');
-            let hours = parseInt(time[0]);
-            let minutes = parseInt(time[1]);
-            let seconds = parseInt(time[2]);
-
-            seconds--;
-            if (seconds < 0) {
-                seconds = 59;
-                minutes--;
-                if (minutes < 0) {
-                    minutes = 59;
-                    hours--;
-                    if (hours < 0) {
-                        hours = 0;
-                        minutes = 0;
-                        seconds = 0;
-                    }
-                }
-            }
-
-            countdownElement.textContent =
-                `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-        }
-    }
-
-    setInterval(updateCountdown, 1000);
-
-    // Gestion des boutons d'action
-    const actionBtns = document.querySelectorAll('.action-btn');
-    actionBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const card = this.closest('.announcement-card');
-            const title = card.querySelector('h3').textContent;
-
-            // Simulation d'action
-            alert(`Action déclenchée pour : "${title}"\n\nVous serez redirigé vers la page de traitement.`);
-
-            // Ici vous intégreriez la logique de redirection vers le formulaire approprié
-            // window.location.href = '/action?annonce=' + encodeURIComponent(title);
-        });
-    });
-});
-</script>
     <script>
         // Header scroll effect
             const header = document.getElementById('header');

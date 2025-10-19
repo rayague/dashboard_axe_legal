@@ -2237,6 +2237,39 @@
             opacity: 0.9;
             margin: 0;
         }
+
+        /* Animations pour les notifications */
+        @keyframes slideInRight {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOutRight {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
+
+        /* Style pour le spinner */
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .fa-spin {
+            animation: spin 1s linear infinite;
+        }
     </style>
 </head>
 <body>
@@ -2391,6 +2424,10 @@
                 </div>
             </div>
 
+            <!-- Formulaire Multi-étapes -->
+            <form method="POST" action="{{ route('consultation.submit') }}" id="consultationMultiStepForm">
+                @csrf
+
             <!-- Étape 1 : Date et Heure -->
             <div class="form-step active" id="step1" style="padding: 2rem;">
                 <h3 style="color: var(--primary-blue); margin-bottom: 2rem; font-size: 1.5rem;">Choisissez la date et l'heure</h3>
@@ -2479,7 +2516,9 @@
                     </div>
                 </div>
 
-                <button onclick="nextStep(2)" style="
+                <input type="hidden" id="consultation-type-hidden" name="consultation_type" value="">
+
+                <button type="button" onclick="nextStep(2)" style="
                     width: 100%;
                     background: var(--primary-blue);
                     color: white;
@@ -2499,36 +2538,29 @@
             <!-- Étape 2 : Informations Personnelles -->
             <div class="form-step" id="step2" style="padding: 2rem; display: none;">
                 @include('partials.flash')
-                <form method="POST" action="{{ route('consultation.submit') }}" id="consultationMultiStepForm">
-                    @csrf
-                    <input type="hidden" name="scheduled_at" id="scheduled_at" value="">
                 <h3 style="color: var(--primary-blue); margin-bottom: 2rem; font-size: 1.5rem;">Vos informations</h3>
-                <form action="">
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
-                        <div>
-                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-dark);">Prénom *</label>
-                            <input type="text" name="first_name" required style="width: 100%; padding: 1rem; border: 2px solid #e9ecef; border-radius: 10px;">
-                        </div>
-                        <div>
-                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-dark);">Nom *</label>
-                            <input type="text" name="name" required style="width: 100%; padding: 1rem; border: 2px solid #e9ecef; border-radius: 10px;">
-                        </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-dark);">Nom complet *</label>
+                        <input type="text" name="name" required style="width: 100%; padding: 1rem; border: 2px solid #e9ecef; border-radius: 10px;" placeholder="Votre nom complet">
                     </div>
+                </div>
 
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
-                        <div>
-                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-dark);">Email *</label>
-                            <input type="email" name="email" required style="width: 100%; padding: 1rem; border: 2px solid #e9ecef; border-radius: 10px;">
-                        </div>
-                        <div>
-                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-dark);">Téléphone *</label>
-                            <input type="tel" name="phone" required style="width: 100%; padding: 1rem; border: 2px solid #e9ecef; border-radius: 10px;">
-                        </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-dark);">Email *</label>
+                        <input type="email" name="email" required style="width: 100%; padding: 1rem; border: 2px solid #e9ecef; border-radius: 10px;" placeholder="votre@email.com">
                     </div>
-                </form>
-                    <div style="margin-bottom: 2rem;">
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-dark);">Téléphone *</label>
+                        <input type="tel" name="phone" required style="width: 100%; padding: 1rem; border: 2px solid #e9ecef; border-radius: 10px;" placeholder="+225 XX XX XX XX XX">
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 2rem;">
                     <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-dark);">Objet de la consultation *</label>
-                    <textarea name="subject" rows="4" placeholder="Décrivez brièvement la raison de votre consultation..." style="
+                    <textarea name="subject" rows="4" required placeholder="Décrivez brièvement la raison de votre consultation..." style="
                         width: 100%;
                         padding: 1rem;
                         border: 2px solid #e9ecef;
@@ -2538,8 +2570,22 @@
                     "></textarea>
                 </div>
 
+                <div style="margin-bottom: 2rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-dark);">Message (optionnel)</label>
+                    <textarea name="message" rows="3" placeholder="Informations complémentaires..." style="
+                        width: 100%;
+                        padding: 1rem;
+                        border: 2px solid #e9ecef;
+                        border-radius: 10px;
+                        resize: vertical;
+                        font-family: inherit;
+                    "></textarea>
+                </div>
+
+                <input type="hidden" name="scheduled_at" id="scheduled_at" value="">
+
                 <div style="display: flex; gap: 1rem;">
-                    <button onclick="prevStep(1)" style="
+                    <button type="button" onclick="prevStep(1)" style="
                         flex: 1;
                         background: #6c757d;
                         color: white;
@@ -2552,7 +2598,7 @@
                     ">
                         <i class="fas fa-arrow-left"></i> Retour
                     </button>
-                    <button onclick="nextStep(3)" style="
+                    <button type="submit" style="
                         flex: 2;
                         background: var(--primary-blue);
                         color: white;
@@ -2568,6 +2614,7 @@
                     </button>
                 </div>
             </div>
+            </form>
 
             <!-- Étape 3 : Confirmation -->
             <div class="form-step" id="step3" style="padding: 3rem; text-align: center; display: none;">
@@ -2740,6 +2787,12 @@ function selectConsultationType(element, type) {
     });
     element.style.borderColor = 'var(--primary-blue)';
     element.style.background = '#f0f7ff';
+    
+    // Store consultation type in hidden field
+    const typeInput = document.getElementById('consultation-type-hidden');
+    if (typeInput) {
+        typeInput.value = type;
+    }
 }
 
 // Réinitialisation du formulaire
@@ -2926,14 +2979,79 @@ function resetForm() {
             const consultForm = document.getElementById('consultationMultiStepForm');
             if (consultForm) {
                 consultForm.addEventListener('submit', function(e) {
+                    e.preventDefault(); // Empêcher la soumission par défaut
+                    
                     const date = document.getElementById('appointment-date')?.value;
                     const time = document.getElementById('appointment-time')?.value;
                     const hidden = document.getElementById('scheduled_at');
+                    
                     if (date && time && hidden) {
                         hidden.value = date + ' ' + time;
                     }
+                    
+                    // Valider les champs requis
+                    const name = document.querySelector('input[name="name"]')?.value;
+                    const email = document.querySelector('input[name="email"]')?.value;
+                    const phone = document.querySelector('input[name="phone"]')?.value;
+                    const subject = document.querySelector('textarea[name="subject"]')?.value;
+                    
+                    if (!name || !email || !phone || !subject) {
+                        showNotification('Veuillez remplir tous les champs obligatoires', 'error');
+                        return;
+                    }
+                    
+                    // Montrer le loader
+                    const submitBtn = this.querySelector('button[type="submit"]');
+                    const originalText = submitBtn.innerHTML;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
+                    submitBtn.disabled = true;
+                    
+                    // Soumettre le formulaire
+                    this.submit();
                 });
             }
+            
+            // Fonction pour afficher les notifications
+            function showNotification(message, type = 'success') {
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: ${type === 'success' ? '#10B981' : '#EF4444'};
+                    color: white;
+                    padding: 1rem 1.5rem;
+                    border-radius: 10px;
+                    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+                    z-index: 10000;
+                    font-weight: 600;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    animation: slideInRight 0.3s ease-out;
+                `;
+                
+                const icon = type === 'success' ? '✅' : '⚠️';
+                notification.innerHTML = `${icon} ${message}`;
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.style.animation = 'slideOutRight 0.3s ease-in';
+                    setTimeout(() => notification.remove(), 300);
+                }, 5000);
+            }
+            
+            // Vérifier s'il y a un message flash au chargement de la page
+            @if(session('status'))
+                document.addEventListener('DOMContentLoaded', function() {
+                    showNotification("{{ session('status') }}", 'success');
+                    // Afficher aussi l'étape de confirmation
+                    setTimeout(() => {
+                        nextStep(3);
+                    }, 1000);
+                });
+            @endif
 
 
         // Initialize loading animations

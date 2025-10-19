@@ -1538,6 +1538,53 @@
             gap: 1rem;
         }
 
+        /* Submit Button Styling */
+        .cta-button,
+        button[type="submit"] {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1rem 2.5rem;
+            background: var(--gradient-blue);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(30, 90, 168, 0.3);
+            margin-top: 1rem;
+            width: auto;
+            min-width: 200px;
+        }
+
+        .cta-button:hover,
+        button[type="submit"]:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(30, 90, 168, 0.4);
+            background: linear-gradient(135deg, #1E5AA8 0%, #4A90E2 100%);
+        }
+
+        .cta-button:active,
+        button[type="submit"]:active {
+            transform: translateY(-1px);
+        }
+
+        .cta-button:disabled,
+        button[type="submit"]:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .cta-button i,
+        button[type="submit"] i {
+            font-size: 1.1rem;
+        }
+
         /* Footer */
         .footer {
             background: var(--text-dark);
@@ -1829,6 +1876,28 @@
             }
         }
 
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+        }
+
         /* Smooth transitions for all interactive elements */
         * {
             transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
@@ -2012,6 +2081,18 @@
             .contact-info {
                 padding: 1.25rem;
                 margin: 0 0.5rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .cta-button,
+            button[type="submit"] {
+                width: 100%;
+                padding: 1rem 1.5rem;
+                font-size: 0.95rem;
             }
 
             .whatsapp-question {
@@ -2366,7 +2447,71 @@
             </div>
         </div>
 
-        <div class="contact-form fade-in" id="consultation">
+        <!-- Formulaire de Contact -->
+        <div class="contact-form fade-in" id="contact-form-section">
+            <div class="section-header">
+                <h3>Envoyez-nous un Message</h3>
+                <p class="section-subtitle">
+                    Remplissez le formulaire ci-dessous et notre équipe vous répondra dans les plus brefs délais.
+                </p>
+            </div>
+
+            <form id="contact-form" action="{{ route('contact.submit') }}" method="POST">
+                @csrf
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">
+                            <i class="fas fa-user"></i> Nom complet *
+                        </label>
+                        <input type="text" id="name" name="name" required placeholder="Votre nom complet">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">
+                            <i class="fas fa-envelope"></i> Email *
+                        </label>
+                        <input type="email" id="email" name="email" required placeholder="votre.email@exemple.com">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone">
+                            <i class="fas fa-phone"></i> Téléphone *
+                        </label>
+                        <input type="tel" id="phone" name="phone" required placeholder="+229 XX XX XX XX">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">
+                            <i class="fas fa-tag"></i> Sujet
+                        </label>
+                        <select id="subject" name="subject">
+                            <option value="">Sélectionnez un sujet</option>
+                            <option value="Information générale">Information générale</option>
+                            <option value="Demande de devis">Demande de devis</option>
+                            <option value="Prise de rendez-vous">Prise de rendez-vous</option>
+                            <option value="Question juridique">Question juridique</option>
+                            <option value="Autre">Autre</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">
+                        <i class="fas fa-comment"></i> Message *
+                    </label>
+                    <textarea id="message" name="message" required rows="6" placeholder="Décrivez votre demande en détail..."></textarea>
+                </div>
+
+                <button type="submit" class="cta-button">
+                    <i class="fas fa-paper-plane"></i> Envoyer le message
+                </button>
+            </form>
+        </div>
+
+        <!-- Questions Fréquentes WhatsApp -->
+        <div class="contact-form fade-in" id="consultation" style="margin-top: 4rem;">
             <div class="section-header">
                 <h3>Questions Fréquentes</h3>
                 <p class="section-subtitle">
@@ -2644,31 +2789,82 @@
 
             // Get form data
             const formData = new FormData(this);
-            const data = Object.fromEntries(formData);
 
             // Simulate form submission
             const submitBtn = this.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerHTML;
 
-            submitBtn.innerHTML = '⏳ Envoi en cours...';
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
             submitBtn.disabled = true;
 
-            // Simulate API call
-            setTimeout(() => {
-                submitBtn.innerHTML = '✅ Demande envoyée !';
-                submitBtn.style.background = '#10B981';
+            // Submit form via fetch
+            fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Message envoyé !';
+                    submitBtn.style.background = '#10B981';
 
+                    setTimeout(() => {
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.style.background = '';
+                        submitBtn.disabled = false;
+                        this.reset();
+                    }, 3000);
+
+                    // Show success message
+                    showNotification('✅ Votre message a été envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.', 'success');
+                } else {
+                    throw new Error(data.message || 'Une erreur est survenue');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                submitBtn.innerHTML = '<i class="fas fa-exclamation-circle"></i> Erreur';
+                submitBtn.style.background = '#EF4444';
+                
                 setTimeout(() => {
                     submitBtn.innerHTML = originalText;
                     submitBtn.style.background = '';
                     submitBtn.disabled = false;
-                    this.reset();
+                }, 3000);
 
-                    // Show success message
-                    alert('Votre demande a été envoyée avec succès ! Nous vous recontacterons dans les plus brefs délais.');
-                }, 2000);
-            }, 1500);
+                showNotification('❌ Une erreur est survenue. Veuillez réessayer.', 'error');
+            });
         });
+
+        // Notification function
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#10B981' : '#EF4444'};
+                color: white;
+                padding: 1.5rem 2rem;
+                border-radius: 10px;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+                z-index: 10000;
+                animation: slideIn 0.3s ease;
+                max-width: 400px;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 5000);
+        }
 
         // Initialize loading animations
         document.addEventListener('DOMContentLoaded', () => {

@@ -2,7 +2,6 @@
 <ul
     class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
     id="accordionSidebar"
-    style="background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #60a5fa 100%) !important;"
 >
     <!-- Sidebar - Brand -->
     <a
@@ -69,145 +68,18 @@
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Gestion Utilisateurs:</h6>
-                <a class="collapse-item" href="{{ route('dashboard.utilisateurs.clients') }}">Clients</a>
-                <a class="collapse-item" href="{{ route('dashboard.utilisateurs.avocats') }}">Avocats</a>
-                <a class="collapse-item" href="{{ route('dashboard.utilisateurs.administrateurs') }}">Administrateurs</a>
-                <a class="collapse-item" href="{{ route('dashboard.utilisateurs.roles-permissions') }}">Rôles & Permissions</a>
+                <a class="collapse-item" href="{{ route('dashboard.utilisateurs.index') }}">Liste des utilisateurs</a>
+                <a class="collapse-item" href="{{ route('dashboard.utilisateurs.create') }}">Ajouter un utilisateur</a>
             </div>
         </div>
     </li>
 
     <!-- Nav Item - Legal Tech Users -->
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('dashboard.legal-tech') }}">
+        <a class="nav-link" href="{{ route('dashboard.legal-tech.index') }}">
             <i class="fas fa-fw fa-laptop-code" style="color: #06d6a0;"></i>
             <span>Utilisateurs Legal Tech</span>
         </a>
-    </li>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider" />
-
-    <!-- SECTION: SERVICES -->
-    <div class="sidebar-heading" style="color: #a0c4ff; font-size: 0.75rem; font-weight: 800;">
-        SERVICES JURIDIQUES
-    </div>
-
-    <!-- Nav Item - Consultations -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseConsultations"
-            aria-expanded="true" aria-controls="collapseConsultations">
-            <i class="fas fa-fw fa-gavel" style="color: #f59e0b;"></i>
-            <span>Consultations</span>
-        </a>
-        <div id="collapseConsultations" class="collapse" aria-labelledby="headingConsultations"
-            data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Gestion Consultations:</h6>
-                <a class="collapse-item" href="{{ route('dashboard.consultations.historique') }}">Historique</a>
-                <a class="collapse-item" href="{{ route('dashboard.consultations.planning') }}">Planning</a>
-                <a class="collapse-item" href="{{ route('dashboard.consultations.affectations') }}">Affectations</a>
-            </div>
-        </div>
-    </li>
-
-    <!-- Nav Item - Rendez-vous -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRendezVous"
-            aria-expanded="true" aria-controls="collapseRendezVous">
-            <i class="fas fa-fw fa-calendar-alt" style="color: #ef4444;"></i>
-            <span>Rendez-vous</span>
-        </a>
-        <div id="collapseRendezVous" class="collapse" aria-labelledby="headingRendezVous"
-            data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Gestion RDV:</h6>
-                <a class="collapse-item" href="{{ route('dashboard.rendez-vous.nouveau') }}">Nouveau RDV</a>
-                <a class="collapse-item" href="{{ route('dashboard.rendez-vous.planning') }}">Planning</a>
-                <a class="collapse-item" href="{{ route('dashboard.rendez-vous.confirmations') }}">Confirmations</a>
-                <a class="collapse-item" href="{{ route('dashboard.rendez-vous.historique') }}">Historique</a>
-            </div>
-        </div>
-    </li>
-
-    <!-- Nav Item - Services juridiques -->
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('dashboard.services-juridiques') }}">
-            <i class="fas fa-fw fa-briefcase" style="color: #10b981;"></i>
-            <span>Services Juridiques</span>
-        </a>
-    </li>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider" />
-
-    <!-- SECTION: PARTENARIATS & ÉVÉNEMENTS -->
-    <div class="sidebar-heading" style="color: #a0c4ff; font-size: 0.75rem; font-weight: 800;">
-        PARTENARIATS & ÉVÉNEMENTS
-    </div>
-
-    <!-- Nav Item - Partenariats -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePartenariats"
-            aria-expanded="true" aria-controls="collapsePartenariats">
-            <i class="fas fa-fw fa-handshake" style="color: #3b82f6;"></i>
-            <span>Partenariats</span>
-        </a>
-        <div id="collapsePartenariats" class="collapse" aria-labelledby="headingPartenariats"
-            data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Gestion Partenaires:</h6>
-                <a class="collapse-item" href="{{ route('dashboard.partenariats.candidatures') }}">Candidatures</a>
-                <a class="collapse-item" href="{{ route('dashboard.partenariats.offres') }}">Offres</a>
-                <a class="collapse-item" href="{{ route('dashboard.partenariats.suivi') }}">Suivi</a>
-            </div>
-        </div>
-    </li>
-
-    <!-- Nav Item - Événements -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEvenements"
-            aria-expanded="true" aria-controls="collapseEvenements">
-            <i class="fas fa-fw fa-calendar-check" style="color: #ec4899;"></i>
-            <span>Événements</span>
-        </a>
-        <div id="collapseEvenements" class="collapse" aria-labelledby="headingEvenements"
-            data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Gestion Événements:</h6>
-                <a class="collapse-item" href="{{ route('dashboard.evenements.creer') }}">Créer Événement</a>
-                <a class="collapse-item" href="{{ route('dashboard.evenements.participants') }}">Participants</a>
-                <a class="collapse-item" href="{{ route('dashboard.evenements.webinaires') }}">Webinaires</a>
-                <a class="collapse-item" href="{{ route('dashboard.evenements.replays') }}">Replays</a>
-            </div>
-        </div>
-    </li>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider" />
-
-    <!-- SECTION: CONTENU & COMMUNICATION -->
-    <div class="sidebar-heading" style="color: #a0c4ff; font-size: 0.75rem; font-weight: 800;">
-        CONTENU & COMMUNICATION
-    </div>
-
-    <!-- Nav Item - Contenu du site -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseContenu"
-            aria-expanded="true" aria-controls="collapseContenu">
-            <i class="fas fa-fw fa-globe-americas" style="color: #06b6d4;"></i>
-            <span>Contenu du Site</span>
-        </a>
-        <div id="collapseContenu" class="collapse" aria-labelledby="headingContenu"
-            data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Gestion Contenu:</h6>
-                <a class="collapse-item" href="{{ route('dashboard.contenu.accueil') }}">Page Accueil</a>
-                <a class="collapse-item" href="{{ route('dashboard.contenu.a-propos') }}">À Propos</a>
-                <a class="collapse-item" href="{{ route('dashboard.contenu.services') }}">Services</a>
-                <a class="collapse-item" href="{{ route('dashboard.contenu.mediatheque') }}">Médiathèque</a>
-            </div>
-        </div>
     </li>
 
     <!-- Nav Item - Messages & Contact -->
@@ -221,9 +93,8 @@
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Communication:</h6>
-                <a class="collapse-item" href="{{ route('dashboard.messages.demandes') }}">Demandes</a>
-                <a class="collapse-item" href="{{ route('dashboard.messages.formulaires') }}">Formulaires</a>
-                <a class="collapse-item" href="{{ route('dashboard.messages.newsletter') }}">Newsletter</a>
+                <a class="collapse-item" href="{{ route('dashboard.messages.index') }}">Messages reçus</a>
+                <a class="collapse-item" href="{{ route('dashboard.messages.contact-form') }}">Formulaire de contact</a>
             </div>
         </div>
     </li>

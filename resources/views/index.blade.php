@@ -4,20 +4,24 @@
     <!-- Balises Meta Essentielles -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"><!-- Compatibilité Internet Explorer -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <!-- Titre SEO Optimisé (Très Important) -->
+    <!-- Titre et Description -->
     <title>Axe Legal - Cabinet d'Avocats d'Affaires &amp; Juristes Experts au Bénin</title>
+    <meta name="description" content="Cabinet d'avocats d'affaires au Bénin. Expertise en droit des affaires, fiscalité, droit des sociétés, contrats et contentieux. Solutions juridiques sur-mesure pour les entreprises.">
+    <meta name="author" content="Axe Legal">
 
-    <!-- Description Meta (CRUCIALE pour le clic) -->
-    <meta name="description" content="Cabinet d'avocats d'affaires à [Ville, Bénin]. Expertise en droit des affaires, fiscalité, droit des sociétés, contrats et contentieux. Solutions juridiques sur-mesure pour les entreprises.">
-
-    <!-- Balises pour les Robots des Moteurs de Recherche -->
-    <meta name="robots" content="index, follow"><!-- Demande l'indexation et le suivi des liens -->
+    <!-- SEO -->
+    <meta name="robots" content="index, follow">
     <meta name="googlebot" content="index, follow">
 
-    <!-- Auteur et Droits d'Auteur -->
-    <meta name="author" content="Axe Legal">
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ asset('assets/favicon.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/apple-touch-icon.png') }}">
+    <link rel="manifest" href="{{ asset('assets/site.webmanifest') }}">
     <meta name="copyright" content="Axe Legal">
 
     <!-- Canonical URL (Évite le contenu dupliqué) -->
@@ -82,7 +86,7 @@
             --accent-blue: #4A90E2;
             --light-blue: #E8F2FF;
             --dark-blue: #0F3A6B;
-            
+
             /* Couleurs neutres - Thème clair */
             --dark-gray: #1F2937;
             --medium-gray: #6B7280;
@@ -92,7 +96,7 @@
             --text-medium: #4B5563;
             --text-light: #6B7280;
             --border-light: #E5E7EB;
-            
+
             --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
@@ -524,12 +528,12 @@
             .nav-menu {
                 gap: 0.1rem;
             }
-            
+
             .nav-link {
                 padding: 0.6rem 0.6rem;
                 font-size: 0.8rem;
             }
-            
+
             .btn {
                 padding: 0.6rem 0.8rem;
                 font-size: 0.8rem;
@@ -540,20 +544,20 @@
             .nav-menu {
                 gap: 0.1rem;
             }
-            
+
             .nav-link {
                 padding: 0.5rem 0.4rem;
                 font-size: 0.75rem;
             }
-            
+
             .nav-link span {
                 display: none;
             }
-            
+
             .nav-link i {
                 font-size: 1rem;
             }
-            
+
             .btn {
                 padding: 0.6rem 0.8rem;
                 font-size: 0.75rem;
@@ -564,15 +568,15 @@
             .nav-container {
                 padding: 0 0.75rem;
             }
-            
+
             .nav-menu {
                 display: none;
             }
-            
+
             .nav-cta {
                 display: none;
             }
-            
+
             .mobile-menu-btn {
                 display: flex;
             }
@@ -582,7 +586,7 @@
             .nav-container {
                 padding: 0 0.5rem;
             }
-            
+
             .mobile-nav-link {
                 font-size: 1rem;
                 padding: 1.25rem 1.5rem;
@@ -714,18 +718,18 @@
                 line-height: 1.2;
                 margin-bottom: 1rem;
             }
-            
+
             .hero-subtitle {
                 font-size: 1rem;
                 margin-bottom: 1.5rem;
                 padding: 0 0.5rem;
             }
-            
+
             .hero-cta {
                 flex-direction: column;
                 gap: 0.75rem;
             }
-            
+
             .hero-cta .btn {
                 width: 100%;
                 text-align: center;
@@ -737,7 +741,7 @@
                 font-size: clamp(1.6rem, 7vw, 2.2rem);
                 line-height: 1.3;
             }
-            
+
             .hero-subtitle {
                 font-size: 0.95rem;
                 padding: 0 0.75rem;
@@ -1339,11 +1343,11 @@
                 gap: 2rem;
                 padding: 0 1rem;
             }
-            
+
             .stat-number {
                 font-size: 2.5rem;
             }
-            
+
             .stat-label {
                 font-size: 1rem;
             }
@@ -1355,12 +1359,12 @@
                 gap: 1.5rem;
                 padding: 0 0.75rem;
             }
-            
+
             .stat-number {
                 font-size: 2rem;
                 margin-bottom: 0.75rem;
             }
-            
+
             .stat-label {
                 font-size: 0.9rem;
             }
@@ -1371,17 +1375,17 @@
                 padding-top: 4.5rem;
                 padding-bottom: 2.5rem;
             }
-            
+
             .stats-grid {
                 gap: 1rem;
                 padding: 0 0.5rem;
             }
-            
+
             .stat-number {
                 font-size: 1.8rem;
                 margin-bottom: 0.5rem;
             }
-            
+
             .stat-label {
                 font-size: 0.85rem;
             }
@@ -1917,12 +1921,12 @@
             .nav-menu {
                 gap: 0.1rem;
             }
-            
+
             .nav-link {
                 padding: 0.6rem 0.6rem;
                 font-size: 0.8rem;
             }
-            
+
             .btn {
                 padding: 0.6rem 0.8rem;
                 font-size: 0.8rem;
@@ -1933,20 +1937,20 @@
             .nav-menu {
                 gap: 0.1rem;
             }
-            
+
             .nav-link {
                 padding: 0.5rem 0.4rem;
                 font-size: 0.75rem;
             }
-            
+
             .nav-link span {
                 display: none;
             }
-            
+
             .nav-link i {
                 font-size: 1rem;
             }
-            
+
             .btn {
                 padding: 0.6rem 0.8rem;
                 font-size: 0.75rem;
@@ -1957,11 +1961,11 @@
             .nav-container {
                 padding: 0 0.75rem;
             }
-            
+
             .nav-menu {
                 display: none;
             }
-            
+
             .nav-cta {
                 display: none;
             }
@@ -1975,7 +1979,7 @@
             .nav-container {
                 padding: 0 0.5rem;
             }
-            
+
             .mobile-nav-link {
                 font-size: 1rem;
                 padding: 1.25rem 1.5rem;
@@ -2032,43 +2036,43 @@
                 padding-top: 5rem;
                 padding-bottom: 4rem;
             }
-            
+
             .hero-container {
                 padding: 2rem 1.5rem;
                 min-height: auto;
                 gap: 2rem;
             }
-            
+
             .hero-content {
                 padding: 0;
             }
-            
+
             .hero-visual {
                 order: -1;
                 height: 300px;
             }
-            
+
             .hero-image {
                 height: 300px;
                 font-size: 4rem;
             }
-            
+
             .hero-carousel {
                 height: 300px;
             }
-            
+
             .carousel-content {
                 padding: 1.5rem;
             }
-            
+
             .carousel-icon {
                 font-size: 3rem;
             }
-            
+
             .carousel-content h3 {
                 font-size: 1.3rem;
             }
-            
+
             .carousel-content p {
                 font-size: 0.9rem;
             }
@@ -2079,48 +2083,48 @@
                 padding-top: 5rem;
                 padding-bottom: 3rem;
             }
-            
+
             .hero-container {
                 padding: 3.5rem 1rem;
                 gap: 1.5rem;
             }
-            
+
             .hero-visual {
                 height: 250px;
             }
-            
+
             .hero-image {
                 height: 250px;
                 font-size: 3rem;
             }
-            
+
             .hero-carousel {
                 height: 250px;
             }
-            
+
             .carousel-content {
                 padding: 1rem;
             }
-            
+
             .carousel-icon {
                 font-size: 2.5rem;
             }
-            
+
             .carousel-content h3 {
                 font-size: 1.1rem;
             }
-            
+
             .carousel-content p {
                 font-size: 0.85rem;
             }
-            
+
             .carousel-prev,
             .carousel-next {
                 width: 40px;
                 height: 40px;
                 font-size: 1.2rem;
             }
-            
+
             .indicator {
                 width: 10px;
                 height: 10px;
@@ -2214,7 +2218,7 @@
             .contact-container {
                 padding: 0 1rem;
             }
-            
+
             .hero,
             .services,
             .about,
@@ -2234,7 +2238,7 @@
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
             }
-            
+
             .team-grid {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
@@ -2244,7 +2248,7 @@
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
             }
-            
+
             .about-features {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
@@ -2253,7 +2257,7 @@
             .form-row {
                 grid-template-columns: 1fr;
             }
-            
+
             .footer-content {
                 grid-template-columns: 1fr;
                 gap: 2rem;
@@ -2268,13 +2272,13 @@
                 grid-template-columns: repeat(2, 1fr);
                 gap: 1.5rem;
             }
-            
+
             .service-card,
             .team-card,
             .testimonial-card {
                 padding: 1.5rem;
             }
-            
+
             .contact-form,
             .contact-info {
                 padding: 1.5rem;
@@ -2290,7 +2294,7 @@
             .contact-container {
                 padding: 0 0.75rem;
             }
-            
+
             .hero,
             .services,
             .about,
@@ -2300,30 +2304,30 @@
             .contact {
                 padding: 2rem 0.75rem;
             }
-            
+
             .about-container {
                 padding: 0 1rem;
             }
-            
+
             .about-content {
                 padding: 0 0.5rem;
             }
-            
+
             .about-features {
                 gap: 1.5rem;
                 margin-top: 2rem;
             }
-            
+
             .about-feature {
                 padding: 1rem;
                 margin: 0 0.25rem;
             }
-            
+
             .hero-title {
                 font-size: clamp(1.6rem, 7vw, 2.2rem);
                 line-height: 1.3;
             }
-            
+
             .section-title {
                 font-size: 1.8rem;
             }
@@ -2341,31 +2345,31 @@
                 padding: 1.25rem;
                 margin: 0 0.5rem;
             }
-            
+
             .whatsapp-question {
                 padding: 1rem;
                 margin: 0 0.5rem;
                 border-radius: 10px;
             }
-            
+
             .trust-section {
                 padding: 2rem 0.75rem;
             }
-            
+
             .trust-grid {
                 gap: 1rem;
             }
-            
+
             .trust-item {
                 padding: 1rem;
                 margin: 0 0.5rem;
             }
-            
+
             .stats-grid {
                 gap: 1rem;
                 padding: 0 0.75rem;
             }
-            
+
             .stat-item {
                 padding: 1.5rem 1rem;
             }
@@ -2380,7 +2384,7 @@
             .contact-container {
                 padding: 0 0.5rem;
             }
-            
+
             .hero,
             .services,
             .about,
@@ -2403,16 +2407,16 @@
                 padding: 1rem;
                 margin: 0 0.25rem;
             }
-            
+
             .whatsapp-question {
                 padding: 0.75rem;
                 margin: 0 0.25rem;
             }
-            
+
             .trust-section {
                 padding: 1.5rem 0.5rem;
             }
-            
+
             .trust-item {
                 padding: 0.75rem;
                 margin: 0 0.25rem;
@@ -2570,32 +2574,32 @@
 
 
         /* Accessibility Enhancements */
-        
+
         .hero-title {
             font-size: 3rem;
             font-weight: 700;
             margin-bottom: 1rem;
             line-height: 1.2;
         }
-        
+
         .highlight {
             color: #6366f1;
             font-weight: 800;
         }
-        
+
         .hero-subtitle {
             font-size: 1.2rem;
             margin-bottom: 2rem;
             opacity: 0.9;
             line-height: 1.6;
         }
-        
+
         .hero-cta {
             display: flex;
             gap: 1rem;
             flex-wrap: wrap;
         }
-        
+
         .btn {
             padding: 1rem 2rem;
             border-radius: 8px;
@@ -2603,15 +2607,15 @@
             font-weight: 600;
             transition: all 0.3s ease;
         }
-        
-        
+
+
         /* Animation loading */
         .loading {
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInUp 0.8s ease forwards;
         }
-        
+
         @keyframes fadeInUp {
             to {
                 opacity: 1;
@@ -2626,11 +2630,11 @@
             transition: transform 0.5s ease;
             display: block;
         }
-        
+
         .carousel-image {
             background: var(--gradient-light);
         }
-        
+
         .carousel-slide.active .carousel-image img {
             transform: scale(1.05);
         }
@@ -2644,25 +2648,25 @@
     .announcements-section {
         padding: 3rem 0.5rem !important;
     }
-    
+
     .announcements-grid {
         grid-template-columns: 1fr !important;
         gap: 1.5rem !important;
     }
-    
+
     .announcement-filters {
         gap: 0.5rem !important;
     }
-    
+
     .filter-btn {
         padding: 0.6rem 1rem !important;
         font-size: 0.8rem !important;
     }
-    
+
     .newsletter-section {
         padding: 2rem 1rem !important;
     }
-    
+
     .newsletter-section > div {
         flex-direction: column;
     }
@@ -2672,20 +2676,20 @@
     .announcements-header h2 {
         font-size: 1.6rem !important;
     }
-    
+
     .announcement-card {
         margin: 0 0.5rem !important;
     }
-    
+
     .announcement-card > div:last-child {
         padding: 1.5rem !important;
     }
-    
+
     .action-btn {
         padding: 0.8rem !important;
         font-size: 0.9rem !important;
     }
-    
+
     /* Ajustement des boutons en colonne sur mobile */
     .announcement-card > div:last-child > div:last-child {
         flex-direction: column;
@@ -2709,26 +2713,26 @@
         background: #1a202c !important;
         color: white;
     }
-    
+
     .announcement-card,
     .newsletter-section {
         background: #2d3748 !important;
         border-color: #4a5568 !important;
     }
-    
+
     .announcement-card h3,
     .announcement-card p,
     .newsletter-section h3,
     .newsletter-section p {
         color: #e2e8f0 !important;
     }
-    
+
     input[type="email"] {
         background: #4a5568 !important;
         border-color: #718096 !important;
         color: white !important;
     }
-    
+
     input[type="email"]::placeholder {
         color: #a0aec0 !important;
     }
@@ -2807,7 +2811,7 @@
                 </h1>
 
                 <p class="hero-subtitle">
-                    Nous accompagnons entreprises et particuliers avec des solutions juridiques efficaces, 
+                    Nous accompagnons entreprises et particuliers avec des solutions juridiques efficaces,
                     une expertise solide et un service hautement professionnel depuis 2020.
                 </p>
 
@@ -2819,7 +2823,7 @@
                         <i class="fas fa-search"></i> Découvrir nos Services
                     </a>
                 </div>
-                
+
             </div>
             <div class="hero-visual loading">
                 <div class="hero-carousel">
@@ -2828,9 +2832,9 @@
                             <!-- Slide 1 - Droit des Affaires -->
                             <div class="carousel-slide active">
                                 <div class="carousel-image">
-                                    <img 
-                                        src="assets/images/image1.jpg" 
-                                        alt="Équipe d'avocats en droit des affaires travaillant sur un dossier au Bénin" 
+                                    <img
+                                        src="assets/images/image1.jpg"
+                                        alt="Équipe d'avocats en droit des affaires travaillant sur un dossier au Bénin"
                                         loading="lazy"
                                         width="600"
                                         height="400"
@@ -2841,13 +2845,13 @@
                                     </div>
                                 </div>
                             </div>
-            
+
                             <!-- Slide 2 - Fiscalité -->
                             <div class="carousel-slide">
                                 <div class="carousel-image">
-                                    <img 
-                                        src="assets/images/image2.jpg" 
-                                        alt="Consultation fiscale avec un expert-comptable et un juriste à Cotonou" 
+                                    <img
+                                        src="assets/images/image2.jpg"
+                                        alt="Consultation fiscale avec un expert-comptable et un juriste à Cotonou"
                                         loading="lazy"
                                         width="600"
                                         height="400"
@@ -2858,13 +2862,13 @@
                                     </div>
                                 </div>
                             </div>
-            
+
                             <!-- Slide 3 - Droit Immobilier -->
                             <div class="carousel-slide">
                                 <div class="carousel-image">
-                                    <img 
-                                        src="assets/images/image3.jpg" 
-                                        alt="Juriste en droit immobilier lors de la signature d'un acte notarié au Bénin" 
+                                    <img
+                                        src="assets/images/image3.jpg"
+                                        alt="Juriste en droit immobilier lors de la signature d'un acte notarié au Bénin"
                                         loading="lazy"
                                         width="600"
                                         height="400"
@@ -2875,13 +2879,13 @@
                                     </div>
                                 </div>
                             </div>
-            
+
                             <!-- Slide 4 - Accompagnement -->
                             <div class="carousel-slide">
                                 <div class="carousel-image">
-                                    <img 
-                                        src="assets/images/image4.jpg" 
-                                        alt="Avocat offrant un accompagnement juridique personnalisé à un client" 
+                                    <img
+                                        src="assets/images/image4.jpg"
+                                        alt="Avocat offrant un accompagnement juridique personnalisé à un client"
                                         loading="lazy"
                                         width="600"
                                         height="400"
@@ -2892,13 +2896,13 @@
                                     </div>
                                 </div>
                             </div>
-            
+
                             <!-- Slide 5 - Cabinet (Optionnel) -->
                             <div class="carousel-slide">
                                 <div class="carousel-image">
-                                    <img 
-                                        src="assets/images/image5.jpg" 
-                                        alt="Cabinet d'avocats Axe Legal à Cotonou - Environnement professionnel d'excellence" 
+                                    <img
+                                        src="assets/images/image5.jpg"
+                                        alt="Cabinet d'avocats Axe Legal à Cotonou - Environnement professionnel d'excellence"
                                         loading="lazy"
                                         width="600"
                                         height="400"
@@ -2910,12 +2914,12 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="carousel-controls">
                             <button class="carousel-prev" aria-label="Image précédente">‹</button>
                             <button class="carousel-next" aria-label="Image suivante">›</button>
                         </div>
-                        
+
                         <div class="carousel-indicators">
                             <span class="indicator active" data-slide="0"></span>
                             <span class="indicator" data-slide="1"></span>
@@ -2934,7 +2938,7 @@
             <div class="trust-container">
                 <h2 class="trust-title">Reconnu et Certifié</h2>
             <div class="trust-grid">
-        
+
         <div class="trust-item fade-in">
             <div class="trust-icon"><i class="fas fa-balance-scale"></i></div>
             <div class="trust-label">OHADA</div>
@@ -2965,7 +2969,7 @@
                 <div class="section-badge"><i class="fas fa-scale-balanced"></i> Nos Expertises</div>
                 <h2 class="section-title">Services Juridiques Complets</h2>
                 <p class="section-subtitle">
-                    Une gamme complète de services juridiques adaptés aux besoins des entreprises 
+                    Une gamme complète de services juridiques adaptés aux besoins des entreprises
                     et des particuliers, avec une approche personnalisée et des résultats garantis.
                 </p>
             </div>
@@ -3083,15 +3087,15 @@
                 <div class="section-badge"><i class="fas fa-book"></i> Notre Histoire</div>
                 <h2>Excellence et Innovation Juridique</h2>
                 <p>
-                    Fondé en 2008, Axe Legal s'est imposé comme l'un des cabinets d'avocats les plus respectés 
-                    du Bénin. Notre mission est de fournir des solutions juridiques innovantes et sur mesure 
+                    Fondé en 2008, Axe Legal s'est imposé comme l'un des cabinets d'avocats les plus respectés
+                    du Bénin. Notre mission est de fournir des solutions juridiques innovantes et sur mesure
                     à nos clients, qu'ils soient entrepreneurs, entreprises ou particuliers.
                 </p>
                 <p>
-                    Nous combinons une expertise technique pointue avec une approche humaine et personnalisée, 
+                    Nous combinons une expertise technique pointue avec une approche humaine et personnalisée,
                     garantissant à nos clients un accompagnement de qualité à chaque étape de leur parcours juridique.
                 </p>
-                
+
 <div class="about-features">
     <div class="about-feature">
         <div class="about-feature-icon"><i class="fas fa-bullseye"></i></div>
@@ -3169,19 +3173,19 @@
     min-height: 100vh;
 ">
     <div class="container" style="max-width: 1400px; margin: 0 auto;">
-        
+
         <!-- En-tête -->
         <div class="announcements-header" style="text-align: center; margin-bottom: 4rem;">
             <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: var(--primary-blue); color: white; padding: 0.75rem 1.5rem; border-radius: 50px; margin-bottom: 1.5rem; font-size: 0.9rem; font-weight: 600;">
                 <span><i class="fas fa-bullhorn"></i></span> Annonces & Opportunités
             </div>
-            
+
             <h2 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: var(--primary-blue); margin-bottom: 1rem; font-family: 'Playfair Display', serif;">
                 Dernières Opportunités
             </h2>
-            
+
             <p style="font-size: 1.1rem; color: var(--text-dark); max-width: 700px; margin: 0 auto 2rem; line-height: 1.6;">
-                Découvrez nos dernières offres spéciales, promotions et opportunités exclusives. 
+                Découvrez nos dernières offres spéciales, promotions et opportunités exclusives.
                 <strong>Ne manquez pas ces chances uniques !</strong>
             </p>
 
@@ -3237,7 +3241,7 @@
             gap: 2rem;
             margin-bottom: 4rem;
         ">
-            
+
             <!-- Annonce 1 - Promotion Spéciale -->
             <div class="announcement-card" data-category="promotion" style="
                 background: white;
@@ -3252,12 +3256,12 @@
                 <div style="position: absolute; top: 1rem; left: 1rem; background: linear-gradient(135deg, #ff6b6b, #ff8e8e); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; z-index: 2;">
                     <i class="fas fa-tag"></i> PROMOTION
                 </div>
-                
+
                 <!-- Compteur de temps limité -->
                 <div style="position: absolute; top: 1rem; right: 1rem; background: rgba(0,0,0,0.8); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; z-index: 2;">
                     <i class="fas fa-clock"></i> <span id="countdown-1">48:00:00</span>
                 </div>
-                
+
                 <!-- Image de l'annonce -->
                 <div style="height: 200px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); position: relative; overflow: hidden;">
                     <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: white;">
@@ -3265,17 +3269,17 @@
                         <h4 style="margin: 0; font-size: 1.2rem; font-weight: 600;">OFFRE SPÉCIALE</h4>
                     </div>
                 </div>
-                
+
                 <!-- Contenu de l'annonce -->
                 <div style="padding: 2rem;">
                     <h3 style="color: var(--primary-blue); margin-bottom: 1rem; font-size: 1.4rem; font-weight: 700;">
                         Consultation Juridique à -50%
                     </h3>
-                    
+
                     <p style="color: var(--text-dark); margin-bottom: 1.5rem; line-height: 1.6;">
                         Profitez de notre offre exceptionnelle : consultation juridique complète à moitié prix pour toute nouvelle demande cette semaine.
                     </p>
-                    
+
                     <!-- Détails de l'offre -->
                     <div style="background: #f8f9fa; padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
@@ -3287,7 +3291,7 @@
                             <span style="font-size: 1.3rem; font-weight: 700; color: #28a745;">15 000 Fcfa</span>
                         </div>
                     </div>
-                    
+
                     <!-- Conditions -->
                     <div style="margin-bottom: 1.5rem;">
                         <h4 style="color: var(--primary-blue); margin-bottom: 0.5rem; font-size: 1rem;">Conditions :</h4>
@@ -3297,7 +3301,7 @@
                             <li>Première consultation uniquement</li>
                         </ul>
                     </div>
-                    
+
                     <!-- CTA -->
                     <div style="display: flex; gap: 1rem;">
                         <button class="action-btn" style="
@@ -3310,7 +3314,7 @@
                             font-weight: 600;
                             cursor: pointer;
                             transition: all 0.3s ease;
-                        " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 15px rgba(30, 90, 168, 0.3)'" 
+                        " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 15px rgba(30, 90, 168, 0.3)'"
                         onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
                             <i class="fas fa-bolt"></i> Profiter de l'offre
                         </button>
@@ -3345,7 +3349,7 @@
                 <div style="position: absolute; top: 1rem; left: 1rem; background: linear-gradient(135deg, #17a2b8, #20c997); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; z-index: 2;">
                     <i class="fas fa-handshake"></i> PARTENARIAT
                 </div>
-                
+
                 <!-- Image de l'annonce -->
                 <div style="height: 200px; background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); position: relative; overflow: hidden;">
                     <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: white;">
@@ -3353,17 +3357,17 @@
                         <h4 style="margin: 0; font-size: 1.2rem; font-weight: 600;">PARTENARIAT</h4>
                     </div>
                 </div>
-                
+
                 <!-- Contenu de l'annonce -->
                 <div style="padding: 2rem;">
                     <h3 style="color: #17a2b8; margin-bottom: 1rem; font-size: 1.4rem; font-weight: 700;">
                         Programme Avocats Associés
                     </h3>
-                    
+
                     <p style="color: var(--text-dark); margin-bottom: 1.5rem; line-height: 1.6;">
                         Rejoignez notre réseau d'avocats associés et bénéficiez de notre infrastructure, de notre clientèle et de nos ressources.
                     </p>
-                    
+
                     <!-- Avantages -->
                     <div style="margin-bottom: 1.5rem;">
                         <h4 style="color: #17a2b8; margin-bottom: 0.5rem; font-size: 1rem;">Avantages :</h4>
@@ -3374,7 +3378,7 @@
                             <li>Support administratif complet</li>
                         </ul>
                     </div>
-                    
+
                     <!-- Critères -->
                     <div style="background: #f8f9fa; padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem;">
                         <h4 style="color: #17a2b8; margin-bottom: 0.5rem; font-size: 1rem;">Critères :</h4>
@@ -3389,7 +3393,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- CTA -->
                     <button class="action-btn" style="
                         width: 100%;
@@ -3401,7 +3405,7 @@
                         font-weight: 600;
                         cursor: pointer;
                         transition: all 0.3s ease;
-                    " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 15px rgba(23, 162, 184, 0.3)'" 
+                    " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 15px rgba(23, 162, 184, 0.3)'"
                     onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
                         <i class="fas fa-user-plus"></i> Postuler maintenant
                     </button>
@@ -3422,7 +3426,7 @@
                 <div style="position: absolute; top: 1rem; left: 1rem; background: linear-gradient(135deg, #dc3545, #e83e8c); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; z-index: 2;">
                     <i class="fas fa-exclamation-triangle"></i> URGENT
                 </div>
-                
+
                 <!-- Image de l'annonce -->
                 <div style="height: 200px; background: linear-gradient(135deg, #dc3545 0%, #fd7e14 100%); position: relative; overflow: hidden;">
                     <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: white;">
@@ -3430,17 +3434,17 @@
                         <h4 style="margin: 0; font-size: 1.2rem; font-weight: 600;">OFFRE URGENTE</h4>
                     </div>
                 </div>
-                
+
                 <!-- Contenu de l'annonce -->
                 <div style="padding: 2rem;">
                     <h3 style="color: #dc3545; margin-bottom: 1rem; font-size: 1.4rem; font-weight: 700;">
                         Assistance Litige Immédiate
                     </h3>
-                    
+
                     <p style="color: var(--text-dark); margin-bottom: 1.5rem; line-height: 1.6;">
                         Situation urgente ? Notre équipe est disponible 24h/24 pour les litiges nécessitant une intervention immédiate.
                     </p>
-                    
+
                     <!-- Services urgents -->
                     <div style="margin-bottom: 1.5rem;">
                         <h4 style="color: #dc3545; margin-bottom: 0.5rem; font-size: 1rem;">Services proposés :</h4>
@@ -3451,7 +3455,7 @@
                             <li>Accompagnement aux audiences</li>
                         </ul>
                     </div>
-                    
+
                     <!-- Disponibilité -->
                     <div style="background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 10px; padding: 1rem; margin-bottom: 1.5rem;">
                         <div style="display: flex; align-items: center; gap: 0.5rem; color: #856404;">
@@ -3462,7 +3466,7 @@
                             Appelez le <strong>+229 01 97 74 75 93</strong> pour une assistance immédiate
                         </div>
                     </div>
-                    
+
                     <!-- CTA -->
                     <div style="display: flex; gap: 1rem;">
                         <button class="action-btn" style="
@@ -3475,7 +3479,7 @@
                             font-weight: 600;
                             cursor: pointer;
                             transition: all 0.3s ease;
-                        " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 15px rgba(220, 53, 69, 0.3)'" 
+                        " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 15px rgba(220, 53, 69, 0.3)'"
                         onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
                             <i class="fas fa-phone"></i> Appeler
                         </button>
@@ -3510,7 +3514,7 @@
                 <div style="position: absolute; top: 1rem; left: 1rem; background: linear-gradient(135deg, #28a745, #20c997); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; z-index: 2;">
                     <i class="fas fa-graduation-cap"></i> GRATUIT
                 </div>
-                
+
                 <!-- Image de l'annonce -->
                 <div style="height: 200px; background: linear-gradient(135deg, #28a745 0%, #20c997 100%); position: relative; overflow: hidden;">
                     <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: white;">
@@ -3518,17 +3522,17 @@
                         <h4 style="margin: 0; font-size: 1.2rem; font-weight: 600;">WEBINAIRE</h4>
                     </div>
                 </div>
-                
+
                 <!-- Contenu de l'annonce -->
                 <div style="padding: 2rem;">
                     <h3 style="color: #28a745; margin-bottom: 1rem; font-size: 1.4rem; font-weight: 700;">
                         Webinaire : Droit des Startups
                     </h3>
-                    
+
                     <p style="color: var(--text-dark); margin-bottom: 1.5rem; line-height: 1.6;">
                         Apprenez les bases juridiques essentielles pour lancer et développer votre startup en toute sécurité.
                     </p>
-                    
+
                     <!-- Détails du webinaire -->
                     <div style="background: #f8f9fa; padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem;">
                         <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
@@ -3544,7 +3548,7 @@
                             <span><strong>Places restantes :</strong> 24/50</span>
                         </div>
                     </div>
-                    
+
                     <!-- Intervenant -->
                     <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding: 1rem; background: #e8f5e8; border-radius: 10px;">
                         <div style="width: 50px; height: 50px; background: #28a745; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">
@@ -3555,7 +3559,7 @@
                             <div style="font-size: 0.9rem; color: var(--text-dark);">Expert en droit des affaires</div>
                         </div>
                     </div>
-                    
+
                     <!-- CTA -->
                     <button class="action-btn" style="
                         width: 100%;
@@ -3567,7 +3571,7 @@
                         font-weight: 600;
                         cursor: pointer;
                         transition: all 0.3s ease;
-                    " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 15px rgba(40, 167, 69, 0.3)'" 
+                    " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 15px rgba(40, 167, 69, 0.3)'"
                     onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
                         <i class="fas fa-user-plus"></i> S'inscrire gratuitement
                     </button>
@@ -3589,7 +3593,7 @@
             <p style="color: var(--text-dark); margin-bottom: 2rem; font-size: 1.1rem;">
                 Inscrivez-vous à notre newsletter pour recevoir en premier nos dernières offres et annonces.
             </p>
-            
+
             <div style="display: flex; gap: 1rem; max-width: 500px; margin: 0 auto;">
                 <input type="email" placeholder="Votre email" style="
                     flex: 1;
@@ -3598,7 +3602,7 @@
                     border-radius: 10px;
                     font-size: 1rem;
                     transition: all 0.3s ease;
-                " onfocus="this.style.borderColor='var(--primary-blue)'; this.style.boxShadow='0 0 0 3px rgba(30, 90, 168, 0.1)'" 
+                " onfocus="this.style.borderColor='var(--primary-blue)'; this.style.boxShadow='0 0 0 3px rgba(30, 90, 168, 0.1)'"
                 onblur="this.style.borderColor='#e9ecef'; this.style.boxShadow='none'">
                 <button style="
                     background: var(--primary-blue);
@@ -3609,12 +3613,12 @@
                     font-weight: 600;
                     cursor: pointer;
                     transition: all 0.3s ease;
-                " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 15px rgba(30, 90, 168, 0.3)'" 
+                " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 15px rgba(30, 90, 168, 0.3)'"
                 onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
                     S'abonner
                 </button>
             </div>
-            
+
             <p style="color: #6c757d; font-size: 0.9rem; margin-top: 1rem;">
                 <i class="fas fa-shield-alt"></i> Nous respectons votre vie privée. Désabonnez-vous à tout moment.
             </p>
@@ -3632,7 +3636,7 @@
             <div class="section-badge"><i class="fas fa-users"></i> Notre Équipe</div>
             <h2 class="section-title">Experts Juridiques de Renom</h2>
             <p class="section-subtitle">
-                Une équipe pluridisciplinaire d'avocats expérimentés, reconnus pour leur expertise 
+                Une équipe pluridisciplinaire d'avocats expérimentés, reconnus pour leur expertise
                 et leur engagement envers l'excellence juridique.
             </p>
         </div>
@@ -3652,7 +3656,7 @@
                     <h3 class="team-name">l'Associé-Gérant</h3>
                     <p class="team-role">Direction & Stratégie</p>
                     <p class="team-description">
-                        Pilote la stratégie globale du cabinet et assure la direction des opérations 
+                        Pilote la stratégie globale du cabinet et assure la direction des opérations
                         avec une vision d'excellence et d'innovation juridique.
                     </p>
                     <div class="team-contact">
@@ -3677,7 +3681,7 @@
                     <h3 class="team-name">Cellule de l'Intelligence Fiscale</h3>
                     <p class="team-role">Optimisation & Défense Fiscale</p>
                     <p class="team-description">
-                        Expertise pointue en fiscalité, optimisation fiscale et défense des intérêts 
+                        Expertise pointue en fiscalité, optimisation fiscale et défense des intérêts
                         face aux administrations fiscales.
                     </p>
                     <div class="team-contact">
@@ -3702,7 +3706,7 @@
                     <h3 class="team-name">Cellule des Actes Juridiques et de la Gouvernance d'Entreprise</h3>
                     <p class="team-role">Gouvernance d'Entreprise</p>
                     <p class="team-description">
-                        Spécialisée dans la rédaction d'actes juridiques, la gouvernance d'entreprise 
+                        Spécialisée dans la rédaction d'actes juridiques, la gouvernance d'entreprise
                         et l'accompagnement des structures organisationnelles.
                     </p>
                     <div class="team-contact">
@@ -3727,7 +3731,7 @@
                     <h3 class="team-name">Cellule de Traitement de l'Information Financière</h3>
                     <p class="team-role">Analyse & Intelligence Financière</p>
                     <p class="team-description">
-                        Expertise en analyse financière, traitement de données et intelligence 
+                        Expertise en analyse financière, traitement de données et intelligence
                         économique pour optimiser les décisions stratégiques.
                     </p>
                     <div class="team-contact">
@@ -3742,7 +3746,7 @@
 </section>
 
 
-    
+
     <!-- Testimonials Section -->
     <section id="temoignages" class="testimonials">
         <div class="testimonials-container">
@@ -3750,7 +3754,7 @@
                 <div class="section-badge"><i class="fas fa-comments"></i> Témoignages</div>
                 <h2 class="section-title">Ce Que Disent Nos Clients</h2>
                 <p class="section-subtitle">
-                    La satisfaction de nos clients est notre plus belle récompense. 
+                    La satisfaction de nos clients est notre plus belle récompense.
                     Découvrez leurs témoignages et retours d'expérience.
                 </p>
             </div>
@@ -3758,7 +3762,7 @@
             <div class="testimonials-grid">
                 <div class="testimonial-card fade-in">
                     <p class="testimonial-quote">
-                        "Axe Legal nous a accompagnés dans la création de notre entreprise avec un professionnalisme 
+                        "Axe Legal nous a accompagnés dans la création de notre entreprise avec un professionnalisme
                         remarquable. Leur expertise en droit des affaires nous a permis d'éviter de nombreux écueils."
                     </p>
                     <div class="testimonial-author">
@@ -3772,7 +3776,7 @@
 
                 <div class="testimonial-card fade-in">
                     <p class="testimonial-quote">
-                        "Grâce à Me. Diallo, nous avons résolu un conflit social complexe de manière amiable. 
+                        "Grâce à Me. Diallo, nous avons résolu un conflit social complexe de manière amiable.
                         Son approche humaine et sa compétence technique sont exceptionnelles."
                     </p>
                     <div class="testimonial-author">
@@ -3786,7 +3790,7 @@
 
                 <div class="testimonial-card fade-in">
                     <p class="testimonial-quote">
-                        "Le cabinet Axe Legal a géré notre contentieux fiscal avec une stratégie brillante. 
+                        "Le cabinet Axe Legal a géré notre contentieux fiscal avec une stratégie brillante.
                         Nous avons obtenu gain de cause et économisé des millions de FCFA."
                     </p>
                     <div class="testimonial-author">
@@ -3800,7 +3804,7 @@
 
                 <div class="testimonial-card fade-in">
                     <p class="testimonial-quote">
-                        "Pour notre acquisition immobilière, l'équipe d'Axe Legal a été d'une efficacité remarquable. 
+                        "Pour notre acquisition immobilière, l'équipe d'Axe Legal a été d'une efficacité remarquable.
                         Tout s'est déroulé sans accroc grâce à leur rigueur."
                     </p>
                     <div class="testimonial-author">
@@ -3814,7 +3818,7 @@
 
                 <div class="testimonial-card fade-in">
                     <p class="testimonial-quote">
-                        "Accompagnement exceptionnel pour notre marché public. Leur connaissance des procédures 
+                        "Accompagnement exceptionnel pour notre marché public. Leur connaissance des procédures
                         administratives nous a permis de décrocher le contrat."
                     </p>
                     <div class="testimonial-author">
@@ -3828,7 +3832,7 @@
 
                 <div class="testimonial-card fade-in">
                     <p class="testimonial-quote">
-                        "Service de recouvrement impeccable. Ils ont récupéré nos créances en un temps record 
+                        "Service de recouvrement impeccable. Ils ont récupéré nos créances en un temps record
                         tout en préservant nos relations commerciales."
                     </p>
                     <div class="testimonial-author">
@@ -3843,7 +3847,7 @@
         </div>
     </section>
 
-  
+
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-container">
@@ -3851,10 +3855,10 @@
                 <div class="footer-section">
                     <h4>AXE LEGAL</h4>
                     <p>
-                        Cabinet d'affaires spécialisé dans l'accompagnement juridique des entreprises 
+                        Cabinet d'affaires spécialisé dans l'accompagnement juridique des entreprises
                         et particuliers au Bénin.
                     </p>
-                    
+
                     <p><strong>Composition de l'équipe :</strong></p>
                     <ul class="footer-links">
                         <li>
@@ -3885,7 +3889,7 @@
                     </div>
                 </div>
 
-                
+
                <div class="footer-section">
                     <h4>Nos Prestations</h4>
                     <p><strong>Nous travaillons sous :</strong></p>
@@ -3895,7 +3899,7 @@
                     </ul>
                 </div>
 
-                
+
                 <div class="footer-section">
                     <h4>Informations Légales</h4>
                     <ul class="footer-links">
@@ -3910,7 +3914,7 @@
                     </ul>
                 </div>
 
-                
+
                 <div class="footer-section">
                     <h4>Contact</h4>
                     <p><strong>Adresse :</strong><br>
@@ -3923,10 +3927,10 @@
                     <p><a href="https://maps.app.goo.gl/5b6RALZhyXMQQavh6" target="_blank" style="color: var(--primary-blue);">📍 Voir sur Google Maps</a></p>
                 </div>
             </div>
-            
+
             <div class="footer-bottom">
                 <p>
-                    &copy; 2025 AXE LEGAL - Cabinet d'Affaires. Tous droits réservés. | 
+                    &copy; 2025 AXE LEGAL - Cabinet d'Affaires. Tous droits réservés. |
                     Développement web par Ray Ague
                 </p>
             </div>
@@ -3953,25 +3957,27 @@
 document.addEventListener('DOMContentLoaded', function() {
     const filterBtns = document.querySelectorAll('.filter-btn');
     const announcementCards = document.querySelectorAll('.announcement-card');
-    
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
+
+    if (filterBtns.length > 0) {
+        filterBtns.forEach(btn => {
+            if (btn) {
+                btn.addEventListener('click', function() {
             // Retirer la classe active de tous les boutons
             filterBtns.forEach(b => {
                 b.style.background = b.getAttribute('data-filter') === 'all' ? '#e3f2fd' : 'white';
                 b.style.color = b.getAttribute('data-filter') === 'all' ? 'var(--primary-blue)' : 'var(--text-dark)';
                 b.classList.remove('active');
             });
-            
+
             // Ajouter la classe active au bouton cliqué
             this.classList.add('active');
-            this.style.background = this.getAttribute('data-filter') === 'all' ? 'var(--primary-blue)' : 
+            this.style.background = this.getAttribute('data-filter') === 'all' ? 'var(--primary-blue)' :
                                   this.getAttribute('data-filter') === 'promotion' ? '#ffc107' :
                                   this.getAttribute('data-filter') === 'opportunite' ? '#17a2b8' : '#dc3545';
             this.style.color = 'white';
-            
+
             const filter = this.getAttribute('data-filter');
-            
+
             announcementCards.forEach(card => {
                 if (filter === 'all' || card.getAttribute('data-category') === filter) {
                     card.style.display = 'block';
@@ -3989,20 +3995,24 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     });
-    
+
     // Animation au survol des cartes
-    announcementCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
+    if (announcementCards.length > 0) {
+        announcementCards.forEach(card => {
+            if (card) {
+                card.addEventListener('mouseenter', function() {
             this.style.transform = 'translateY(-10px)';
             this.style.boxShadow = '0 20px 50px rgba(0, 0, 0, 0.15)';
         });
-        
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
-            this.style.boxShadow = '0 10px 40px rgba(0, 0, 0, 0.1)';
+
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = '0 10px 40px rgba(0, 0, 0, 0.1)';
+                });
+            }
         });
-    });
-    
+    }
+
     // Compteur de temps pour les offres limitées
     function updateCountdown() {
         const countdownElement = document.getElementById('countdown-1');
@@ -4012,7 +4022,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let hours = parseInt(time[0]);
             let minutes = parseInt(time[1]);
             let seconds = parseInt(time[2]);
-            
+
             seconds--;
             if (seconds < 0) {
                 seconds = 59;
@@ -4027,24 +4037,24 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
             }
-            
-            countdownElement.textContent = 
+
+            countdownElement.textContent =
                 `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
         }
     }
-    
+
     setInterval(updateCountdown, 1000);
-    
+
     // Gestion des boutons d'action
     const actionBtns = document.querySelectorAll('.action-btn');
     actionBtns.forEach(btn => {
         btn.addEventListener('click', function() {
             const card = this.closest('.announcement-card');
             const title = card.querySelector('h3').textContent;
-            
+
             // Simulation d'action
             alert(`Action déclenchée pour : "${title}"\n\nVous serez redirigé vers la page de traitement.`);
-            
+
             // Ici vous intégreriez la logique de redirection vers le formulaire approprié
             // window.location.href = '/action?annonce=' + encodeURIComponent(title);
         });
@@ -4054,7 +4064,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <script>
         // Header scroll effect
             const header = document.getElementById('header');
-        
+
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
                 header.classList.add('scrolled');
@@ -4099,7 +4109,7 @@ document.addEventListener('DOMContentLoaded', function() {
         window.addEventListener('scroll', () => {
             const sections = document.querySelectorAll('section[id]');
             const navLinks = document.querySelectorAll('.nav-link');
-            
+
             let current = '';
             sections.forEach(section => {
                 const sectionTop = section.offsetTop - 100;
@@ -4126,7 +4136,7 @@ document.addEventListener('DOMContentLoaded', function() {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                    
+
                     // Animate counters when stats section is visible
                     if (entry.target.classList.contains('stats') || entry.target.closest('.stats')) {
                         animateCounters();
@@ -4147,7 +4157,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const target = parseInt(counter.getAttribute('data-target'));
                 const increment = target / 100;
                 let current = 0;
-                
+
                 const updateCounter = () => {
                     if (current < target) {
                         current += increment;
@@ -4166,7 +4176,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
                     }
                 };
-                
+
                 updateCounter();
             });
         }
@@ -4176,29 +4186,29 @@ document.addEventListener('DOMContentLoaded', function() {
         if (contactForm) {
             contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            
+
             // Get form data
             const formData = new FormData(this);
             const data = Object.fromEntries(formData);
-            
+
             // Simulate form submission
             const submitBtn = this.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerHTML;
-            
+
             submitBtn.innerHTML = '⏳ Envoi en cours...';
             submitBtn.disabled = true;
-            
+
             // Simulate API call
             setTimeout(() => {
                 submitBtn.innerHTML = '✅ Demande envoyée !';
                 submitBtn.style.background = '#10B981';
-                
+
                 setTimeout(() => {
                     submitBtn.innerHTML = originalText;
                     submitBtn.style.background = '';
                     submitBtn.disabled = false;
                     this.reset();
-                    
+
                     // Show success message
                     alert('Votre demande a été envoyée avec succès ! Nous vous recontacterons dans les plus brefs délais.');
                 }, 2000);
@@ -4217,7 +4227,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Hero Carousel Functionality
             initHeroCarousel();
-            
+
         });
 
         // Hero Carousel Functions
@@ -4226,13 +4236,13 @@ document.addEventListener('DOMContentLoaded', function() {
             const indicators = document.querySelectorAll('.indicator');
             const prevBtn = document.querySelector('.carousel-prev');
             const nextBtn = document.querySelector('.carousel-next');
-            
-            
+
+
             if (!slides.length || !indicators.length || !prevBtn || !nextBtn) {
                 console.log('Carousel elements not found');
                 return;
             }
-            
+
             let currentSlide = 0;
             let autoSlideInterval;
 
@@ -4336,18 +4346,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Performance optimization
         let ticking = false;
-        
+
         function requestTick() {
             if (!ticking) {
                 requestAnimationFrame(updateAnimations);
                 ticking = true;
             }
         }
-        
+
         function updateAnimations() {
             ticking = false;
         }
-        
+
         window.addEventListener('scroll', requestTick);
 
         // Service card hover effects
@@ -4355,7 +4365,7 @@ document.addEventListener('DOMContentLoaded', function() {
             card.addEventListener('mouseenter', () => {
                 card.style.transform = 'translateY(-10px) scale(1.02)';
             });
-            
+
             card.addEventListener('mouseleave', () => {
                 card.style.transform = 'translateY(0) scale(1)';
             });
@@ -4367,7 +4377,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const image = card.querySelector('.team-image');
                 image.style.transform = 'scale(1.05)';
             });
-            
+
             card.addEventListener('mouseleave', () => {
                 const image = card.querySelector('.team-image');
                 image.style.transform = 'scale(1)';
@@ -4388,7 +4398,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     card.style.boxShadow = '';
                 }
             });
-            
+
             currentTestimonial = (currentTestimonial + 1) % testimonialCards.length;
         }
 
@@ -4402,5 +4412,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     </script>
 
+    <!-- Scripts -->
+    <script src="{{ asset('assets/js/main.js') }}"></script>
 </body>
 </html>

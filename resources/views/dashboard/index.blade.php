@@ -159,6 +159,11 @@
                             <a class="collapse-item" href="{{ route('dashboard.formations.ajouter') }}">Ajouter Formation</a>
                             <a class="collapse-item" href="{{ route('dashboard.formations.liste') }}">Liste Formations</a>
                             <a class="collapse-item" href="{{ route('dashboard.formations.inscriptions') }}">Inscriptions</a>
+                            <div class="collapse-divider"></div>
+                            <h6 class="collapse-header">Catégories:</h6>
+                            <a class="collapse-item" href="{{ route('dashboard.categories.index') }}">
+                                <i class="fas fa-folder mr-1"></i> Gérer Catégories
+                            </a>
                         </div>
                     </div>
                 </li>
@@ -184,9 +189,17 @@
 
                 <!-- Nav Item - Legal Tech Users -->
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('dashboard.legal-tech') }}">
+                    <a class="nav-link" href="{{ route('dashboard.legal-tech.index') }}">
                         <i class="fas fa-fw fa-laptop-code" style="color: #06d6a0;"></i>
                         <span>Utilisateurs Legal Tech</span>
+                    </a>
+                </li>
+
+                <!-- Nav Item - Demandes de Documents -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('dashboard.legal-tech.demandes') }}">
+                        <i class="fas fa-fw fa-file-download" style="color: #f472b6;"></i>
+                        <span>Demandes de Documents</span>
                     </a>
                 </li>
 
@@ -310,7 +323,7 @@
                             <a class="collapse-item" href="{{ route('dashboard.contenu.accueil') }}">Page Accueil</a>
                             <a class="collapse-item" href="{{ route('dashboard.contenu.a-propos') }}">À Propos</a>
                             <a class="collapse-item" href="{{ route('dashboard.contenu.services') }}">Services</a>
-                            <a class="collapse-item" href="{{ route('dashboard.contenu.mediatheque') }}">Médiathèque</a>
+                            <a class="collapse-item" href="{{ route('dashboard.contenu.media.index') }}">Médiathèque</a>
                         </div>
                     </div>
                 </li>
@@ -781,7 +794,7 @@
                                                 <div
                                                     class="h5 mb-0 font-weight-bold text-gray-800"
                                                 >
-                                                    247
+                                                    {{ $consultationsThisMonth ?? 0 }}
                                                 </div>
                                             </div>
                                             <div class="col-auto">
@@ -812,7 +825,7 @@
                                                 <div
                                                     class="h5 mb-0 font-weight-bold text-gray-800"
                                                 >
-                                                    242.500.000 FCFA
+                                                    {{ number_format($revenuAnnuel ?? 0, 0, ',', '.') }} FCFA
                                                 </div>
                                             </div>
                                             <div class="col-auto">
@@ -847,7 +860,7 @@
                                                         <div
                                                             class="h5 mb-0 mr-3 font-weight-bold text-gray-800"
                                                         >
-                                                            94%
+                                                            {{ $tauxSatisfaction ?? 0 }}%
                                                         </div>
                                                     </div>
                                                     <div class="col">
@@ -857,10 +870,8 @@
                                                             <div
                                                                 class="progress-bar bg-info"
                                                                 role="progressbar"
-                                                                style="
-                                                                    width: 94%;
-                                                                "
-                                                                aria-valuenow="94"
+                                                                style="width: {{ $tauxSatisfaction ?? 0 }}%;"
+                                                                aria-valuenow="{{ $tauxSatisfaction ?? 0 }}"
                                                                 aria-valuemin="0"
                                                                 aria-valuemax="100"
                                                             ></div>
@@ -896,7 +907,7 @@
                                                 <div
                                                     class="h5 mb-0 font-weight-bold text-gray-800"
                                                 >
-                                                    12
+                                                    {{ $demandesEnAttente ?? 0 }}
                                                 </div>
                                             </div>
                                             <div class="col-auto">
@@ -927,34 +938,20 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="list-group list-group-flush">
+                                            @forelse($activitesRecentes ?? [] as $activite)
                                             <div class="list-group-item d-flex justify-content-between align-items-center">
                                                 <div>
-                                                    <i class="fas fa-user-plus text-success mr-2"></i>
-                                                    Nouvel utilisateur inscrit
+                                                    <i class="{{ $activite['icon'] }} text-{{ $activite['color'] }} mr-2"></i>
+                                                    {{ $activite['text'] }}
                                                 </div>
-                                                <small class="text-muted">Il y a 2h</small>
+                                                <small class="text-muted">{{ $activite['time'] }}</small>
                                             </div>
-                                            <div class="list-group-item d-flex justify-content-between align-items-center">
-                                                <div>
-                                                    <i class="fas fa-calendar-check text-primary mr-2"></i>
-                                                    RDV confirmé avec Me. Dupont
-                                                </div>
-                                                <small class="text-muted">Il y a 4h</small>
+                                            @empty
+                                            <div class="list-group-item text-center text-muted py-4">
+                                                <i class="fas fa-inbox fa-2x mb-2"></i>
+                                                <p class="mb-0">Aucune activité récente</p>
                                             </div>
-                                            <div class="list-group-item d-flex justify-content-between align-items-center">
-                                                <div>
-                                                    <i class="fas fa-graduation-cap text-warning mr-2"></i>
-                                                    Nouvelle formation publiée
-                                                </div>
-                                                <small class="text-muted">Il y a 6h</small>
-                                            </div>
-                                            <div class="list-group-item d-flex justify-content-between align-items-center">
-                                                <div>
-                                                    <i class="fas fa-credit-card text-success mr-2"></i>
-                                                    Paiement reçu - 175.000 FCFA
-                                                </div>
-                                                <small class="text-muted">Il y a 8h</small>
-                                            </div>
+                                            @endforelse
                                         </div>
                                     </div>
                                 </div>

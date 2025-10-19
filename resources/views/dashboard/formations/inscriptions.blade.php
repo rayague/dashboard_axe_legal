@@ -26,7 +26,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Inscriptions</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">342</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ \App\Models\FormationInscription::count() }}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
@@ -42,7 +42,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Confirmées</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">298</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ \App\Models\FormationInscription::where('statut', 'confirme')->count() }}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-check-circle fa-2x text-gray-300"></i>
@@ -58,7 +58,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">En Attente</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">32</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ \App\Models\FormationInscription::where('statut', 'en_attente')->count() }}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-clock fa-2x text-gray-300"></i>
@@ -74,7 +74,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Annulées</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">12</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ \App\Models\FormationInscription::where('statut', 'annule')->count() }}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-times-circle fa-2x text-gray-300"></i>
@@ -163,36 +163,49 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @forelse($inscriptions as $index => $inscription)
                         <tr>
                             <td>
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input row-checkbox" id="check1">
-                                    <label class="custom-control-label" for="check1"></label>
+                                    <input type="checkbox" class="custom-control-input row-checkbox" id="check{{ $inscription->id }}">
+                                    <label class="custom-control-label" for="check{{ $inscription->id }}"></label>
                                 </div>
                             </td>
                             <td data-label="Participant">
                                 <div class="d-flex align-items-center">
-                                    <img class="rounded-circle mr-2" src="https://ui-avatars.com/api/?name=Marie+Dupont&background=3b82f6&color=fff" width="40" height="40">
+                                    <img class="rounded-circle mr-2" src="https://ui-avatars.com/api/?name={{ urlencode($inscription->nom . ' ' . $inscription->prenom) }}&background=3b82f6&color=fff" width="40" height="40">
                                     <div>
-                                        <div class="font-weight-bold text-responsive">Marie Dupont</div>
-                                        <div class="small text-muted">marie.dupont@email.com</div>
-                                        <div class="small text-muted d-md-none">Droit des Contrats • 149.500 FCFA</div>
+                                        <div class="font-weight-bold text-responsive">{{ $inscription->nom }} {{ $inscription->prenom }}</div>
+                                        <div class="small text-muted">{{ $inscription->email }}</div>
+                                        <div class="small text-muted d-md-none">
+                                            {{ $inscription->formation ? $inscription->formation->titre : 'N/A' }} • 
+                                            {{ $inscription->formation ? number_format($inscription->formation->prix, 0, ',', ' ') : '0' }} FCFA
+                                        </div>
                                     </div>
                                 </div>
                             </td>
                             <td data-label="Formation" class="d-none d-md-table-cell">
-                                <div class="font-weight-bold text-primary">Droit des Contrats</div>
-                                <div class="small text-muted">20h • 149.500 FCFA</div>
+                                <div class="font-weight-bold text-primary">{{ $inscription->formation ? $inscription->formation->titre : 'N/A' }}</div>
+                                <div class="small text-muted">
+                                    {{ $inscription->formation ? $inscription->formation->duree : '0' }}h • 
+                                    {{ $inscription->formation ? number_format($inscription->formation->prix, 0, ',', ' ') : '0' }} FCFA
+                                </div>
                             </td>
                             <td data-label="Date d'inscription" class="d-none d-lg-table-cell">
-                                <div>25/09/2025</div>
-                                <div class="small text-muted">14:30</div>
+                                <div>{{ $inscription->created_at->format('d/m/Y') }}</div>
+                                <div class="small text-muted">{{ $inscription->created_at->format('H:i') }}</div>
                             </td>
                             <td data-label="Paiement" class="d-none d-sm-table-cell">
-                                <span class="badge badge-success">Payé</span>
+                                <span class="badge badge-warning">En attente</span>
                             </td>
                             <td data-label="Statut">
-                                <span class="badge badge-success">Confirmée</span>
+                                @if($inscription->statut === 'confirme')
+                                    <span class="badge badge-success">Confirmée</span>
+                                @elseif($inscription->statut === 'annule')
+                                    <span class="badge badge-danger">Annulée</span>
+                                @else
+                                    <span class="badge badge-warning">En attente</span>
+                                @endif
                             </td>
                             <td data-label="Actions">
                                 <div class="dropdown">
@@ -200,97 +213,45 @@
                                         <i class="fas fa-cog"></i>
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">
+                                        <a class="dropdown-item" href="#" onclick="showDetails({{ $inscription->id }})">
                                             <i class="fas fa-eye mr-2"></i>Voir détails
                                         </a>
-                                        <a class="dropdown-item" href="#">
+                                        @if($inscription->statut === 'en_attente')
+                                        <a class="dropdown-item" href="#" onclick="updateStatus({{ $inscription->id }}, 'confirme')">
+                                            <i class="fas fa-check mr-2"></i>Confirmer
+                                        </a>
+                                        @endif
+                                        <a class="dropdown-item" href="mailto:{{ $inscription->email }}">
                                             <i class="fas fa-envelope mr-2"></i>Envoyer email
                                         </a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item text-danger" href="#">
+                                        <a class="dropdown-item text-danger" href="#" onclick="updateStatus({{ $inscription->id }}, 'annule')">
                                             <i class="fas fa-times mr-2"></i>Annuler
                                         </a>
                                     </div>
                                 </div>
                             </td>
                         </tr>
+                        @empty
                         <tr>
-                            <td>
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input row-checkbox" id="check2">
-                                    <label class="custom-control-label" for="check2"></label>
-                                </div>
-                            </td>
-                            <td data-label="Participant">
-                                <div class="d-flex align-items-center">
-                                    <img class="rounded-circle mr-2" src="https://ui-avatars.com/api/?name=Jean+Martin&background=28a745&color=fff" width="40" height="40">
-                                    <div>
-                                        <div class="font-weight-bold text-responsive">Jean Martin</div>
-                                        <div class="small text-muted">jean.martin@email.com</div>
-                                        <div class="small text-muted d-md-none">Droit Immobilier • 225.000 FCFA</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td data-label="Formation" class="d-none d-md-table-cell">
-                                <div class="font-weight-bold text-primary">Droit Immobilier</div>
-                                <div class="small text-muted">35h • 225.000 FCFA</div>
-                            </td>
-                            <td data-label="Date d'inscription" class="d-none d-lg-table-cell">
-                                <div>20/09/2025</div>
-                                <div class="small text-muted">09:15</div>
-                            </td>
-                            <td data-label="Paiement" class="d-none d-sm-table-cell">
-                                <span class="badge badge-warning">En attente</span>
-                            </td>
-                            <td data-label="Statut">
-                                <span class="badge badge-warning">En attente</span>
-                            </td>
-                            <td data-label="Actions">
-                                <div class="dropdown">
-                                    <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
-                                        <i class="fas fa-cog"></i>
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">
-                                            <i class="fas fa-eye mr-2"></i>Voir détails
-                                        </a>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="fas fa-check mr-2"></i>Confirmer
-                                        </a>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="fas fa-envelope mr-2"></i>Rappel paiement
-                                        </a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item text-danger" href="#">
-                                            <i class="fas fa-times mr-2"></i>Annuler
-                                        </a>
-                                    </div>
-                                </div>
+                            <td colspan="7" class="text-center py-5">
+                                <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+                                <p class="text-muted">Aucune inscription trouvée</p>
                             </td>
                         </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
         </div>
         <div class="card-footer d-flex flex-column flex-sm-row justify-content-between align-items-center">
             <div class="mb-2 mb-sm-0">
-                <small class="text-muted">Affichage de 1 à 20 sur 342 inscriptions</small>
+                <small class="text-muted">
+                    Affichage de {{ $inscriptions->firstItem() ?? 0 }} à {{ $inscriptions->lastItem() ?? 0 }} sur {{ $inscriptions->total() }} inscriptions
+                </small>
             </div>
             <nav aria-label="Inscriptions pagination">
-                <ul class="pagination pagination-sm mb-0">
-                    <li class="page-item disabled">
-                        <span class="page-link">Précédent</span>
-                    </li>
-                    <li class="page-item active">
-                        <span class="page-link">1</span>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Suivant</a>
-                    </li>
-                </ul>
+                {{ $inscriptions->links() }}
             </nav>
         </div>
     </div>
