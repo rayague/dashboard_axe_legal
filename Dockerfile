@@ -1,7 +1,5 @@
+# Utiliser PHP FPM comme base
 FROM php:8.2-fpm
-
-# Utiliser une image PHP avec Composer et extensions utiles
-FROM php:8.2-cli
 
 # Installer dépendances système
 RUN apt-get update && apt-get install -y \
@@ -18,20 +16,15 @@ COPY . .
 # Installer les dépendances PHP
 RUN composer install --no-dev --optimize-autoloader
 
-# Générer la clé d'application
-# RUN php artisan key:generate
+# Créer les dossiers nécessaires avec les bonnes permissions
+RUN mkdir -p /app/storage && chmod -R 777 /app/storage && touch /app/storage/database.sqlite
 
-RUN touch /tmp/database.sqlite
-
-# Démarrer Laravel et s'assurer que le fichier SQLite existe
-CMD touch /tmp/database.sqlite && php artisan migrate --force && php artisan serve --host 0.0.0.0 --port 8000
-
-
-# Exposer le port sur lequel Laravel va tourner
+# Exposer le port
 EXPOSE 8000
 
-# Démarrer l'application
-CMD php artisan serve --host 0.0.0.0 --port 8000
+# Démarrer Laravel et s'assurer que le fichier SQLite existe
+CMD php artisan migrate --force && php artisan serve --host 0.0.0.0 --port 8000
+
 
 
 # Installer les dépendances
