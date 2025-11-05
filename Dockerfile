@@ -19,7 +19,7 @@ COPY . .
 RUN composer install --no-dev --optimize-autoloader
 
 # Générer la clé d'application
-RUN php artisan key:generate
+# RUN php artisan key:generate
 
 # Exposer le port sur lequel Laravel va tourner
 EXPOSE 8000
