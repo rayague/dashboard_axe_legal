@@ -23,6 +23,10 @@ RUN composer install --no-dev --optimize-autoloader
 
 RUN touch /tmp/database.sqlite
 
+# Démarrer Laravel et s'assurer que le fichier SQLite existe
+CMD touch /tmp/database.sqlite && php artisan migrate --force && php artisan serve --host 0.0.0.0 --port 8000
+
+
 # Exposer le port sur lequel Laravel va tourner
 EXPOSE 8000
 
