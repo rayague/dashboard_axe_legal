@@ -1,5 +1,33 @@
 FROM php:8.2-fpm
 
+# Utiliser une image PHP avec Composer et extensions utiles
+FROM php:8.2-cli
+
+# Installer dépendances système
+RUN apt-get update && apt-get install -y \
+    zip unzip git curl libpng-dev libonig-dev libxml2-dev \
+    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+
+# Installer Composer
+COPY --from=composer:2.6 /usr/bin/composer /usr/bin/composer
+
+# Copier le code source
+WORKDIR /app
+COPY . .
+
+# Installer les dépendances PHP
+RUN composer install --no-dev --optimize-autoloader
+
+# Générer la clé d'application
+RUN php artisan key:generate
+
+# Exposer le port sur lequel Laravel va tourner
+EXPOSE 8000
+
+# Démarrer l'application
+CMD php artisan serve --host 0.0.0.0 --port 8000
+
+
 # Installer les dépendances
 RUN apt-get update && apt-get install -y \
     build-essential \
